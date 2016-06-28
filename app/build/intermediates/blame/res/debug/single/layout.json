@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "/home/fay/Code/Memory/app/build/intermediates/res/merged/debug/layout/widget_view_light.xml",
+        "source": "/home/fay/Code/Memory/app/src/main/res/layout/widget_view_light.xml"
+    },
+    {
+        "merged": "/home/fay/Code/Memory/app/build/intermediates/res/merged/debug/layout/activity_welcome.xml",
+        "source": "/home/fay/Code/Memory/app/src/main/res/layout/activity_welcome.xml"
+    },
+    {
+        "merged": "/home/fay/Code/Memory/app/build/intermediates/res/merged/debug/layout/activity_add.xml",
+        "source": "/home/fay/Code/Memory/app/src/main/res/layout/activity_add.xml"
+    },
+    {
+        "merged": "/home/fay/Code/Memory/app/build/intermediates/res/merged/debug/layout/list_item.xml",
+        "source": "/home/fay/Code/Memory/app/src/main/res/layout/list_item.xml"
+    },
+    {
+        "merged": "/home/fay/Code/Memory/app/build/intermediates/res/merged/debug/layout/widget_view_dark.xml",
+        "source": "/home/fay/Code/Memory/app/src/main/res/layout/widget_view_dark.xml"
+    },
+    {
+        "merged": "/home/fay/Code/Memory/app/build/intermediates/res/merged/debug/layout/activity_main.xml",
+        "source": "/home/fay/Code/Memory/app/src/main/res/layout/activity_main.xml"
+    }
+]

@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/fay/Code/Memory/app/build/intermediates/res/merged/debug/xml/widget_info_dark.xml",
+        "source": "/home/fay/Code/Memory/app/src/main/res/xml/widget_info_dark.xml"
+    },
+    {
+        "merged": "/home/fay/Code/Memory/app/build/intermediates/res/merged/debug/xml/widget_info_light.xml",
+        "source": "/home/fay/Code/Memory/app/src/main/res/xml/widget_info_light.xml"
+    }
+]

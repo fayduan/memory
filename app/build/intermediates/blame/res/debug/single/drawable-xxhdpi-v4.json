@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/fay/Code/Memory/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4/ic_welcome.png",
+        "source": "/home/fay/Code/Memory/app/src/main/res/drawable-xxhdpi/ic_welcome.png"
+    },
+    {
+        "merged": "/home/fay/Code/Memory/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4/ic_launcher.png",
+        "source": "/home/fay/Code/Memory/app/src/main/res/drawable-xxhdpi/ic_launcher.png"
+    }
+]

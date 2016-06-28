@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Memory</string>
+    <string name="version">0.5</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="msg_main_day">天 </string>
+    <string name="action_settings">Settings</string>
+    <string name="action_add">Add</string>
+	<string name="menu_settings">设置</string>
+	<string name="menu_teach">说明</string>
+	<string name="menu_aboutus">关于</string>
+	<string name="btn_ok">完成</string>
+	<string name="btn_cancel">取消</string>
+	<string name="msg_name">纪念什么</string>
+	<string name="msg_date">纪念哪天</string>
+	<string name="msg_nolist">还没有纪念日，快去添加一条呗~</string>
+	
+
+</resources>
