@@ -7,6 +7,8 @@ import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
 
+import cn.duanyufei.util.UpdateTask;
+
 public class WelcomActivity extends Activity {
 
 	@Override
@@ -16,7 +18,9 @@ public class WelcomActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);   
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,   
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);          
-        setContentView(R.layout.activity_welcome);  
+        setContentView(R.layout.activity_welcome);
+
+        new UpdateTask(this).update();
 
         new Handler().postDelayed(new Runnable() {            
             @Override  
