@@ -1,12 +1,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.duanyufei.memory.MainActivity" >
+	xmlns:tools="http://schemas.android.com/tools"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	tools:context="com.duanyufei.memory.MainActivity">
 
     <item
         android:id="@+id/action_add"
         android:orderInCategory="0"
-        android:showAsAction="always"
-        android:icon="@drawable/ic_action_add"
+        app:showAsAction="always"
+        android:icon="@mipmap/ic_action_add"
         android:title="@string/action_add"/>
 	<item
 	    android:id="@+id/menu_settings"

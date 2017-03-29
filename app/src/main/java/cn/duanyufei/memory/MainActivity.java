@@ -1,11 +1,12 @@
 package cn.duanyufei.memory;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,7 +26,7 @@ import cn.duanyufei.db.DBDao;
 import cn.duanyufei.model.Memory;
 import cn.duanyufei.util.UpdateTask;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     private List<Memory> ml;
     //private List<Integer> selected;
@@ -40,6 +41,10 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         delid = 0;
         setContentView(R.layout.activity_main);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         lv = (ListView) findViewById(R.id.list);
         tv = (TextView) findViewById(R.id.msg_main);
         lv.setOnItemClickListener(itemListener);

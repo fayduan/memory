@@ -41,14 +41,10 @@ public class AddActivity extends Activity {
         id = get.getIntExtra("id", -1);
 
         setContentView(R.layout.activity_add);
-        btn_cancel = (LinearLayout) findViewById(R.id.btn_cancel);
-        btn_cancel.setClickable(true);
-        btn_cancel.setOnTouchListener(touch_cancel);
-        btn_cancel.setOnClickListener(click_cancel);
-        btn_ok = (LinearLayout) findViewById(R.id.btn_ok);
-        btn_ok.setClickable(true);
-        btn_ok.setOnTouchListener(touch_ok);
-        btn_ok.setOnClickListener(click_ok);
+        //btn_ok = (LinearLayout) findViewById(R.id.btn_ok);
+//        btn_ok.setClickable(true);
+//        btn_ok.setOnTouchListener(touch_ok);
+//        btn_ok.setOnClickListener(click_ok);
         mname = (EditText) findViewById(R.id.mname);
         dp = (DatePicker) findViewById(R.id.add_dp);
         calendar = Calendar.getInstance();
@@ -77,7 +73,7 @@ public class AddActivity extends Activity {
 
         @Override
         public void onClick(View v) {
-            Toast.makeText(getApplicationContext(), "����,զȡ����...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "????,??????...", Toast.LENGTH_SHORT).show();
             backMain();
         }
     };
@@ -100,7 +96,7 @@ public class AddActivity extends Activity {
                 }
                 backMain();
             } else {
-                Toast.makeText(getApplicationContext(), "�������ʲô������?�������˰�", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
             }
         }
     };

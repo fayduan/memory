@@ -9,7 +9,7 @@
 	    android:layout_height="wrap_content"  
 	    android:layout_marginTop="200dp"
 	    android:layout_gravity="center_horizontal|center_vertical"
-	    android:src="@drawable/ic_welcome"  
+	    android:src="@mipmap/ic_welcome"
 	    android:background="#fdfdfd"  
 	    android:scaleType="centerCrop"/>  
 	<ImageView   
@@ -17,7 +17,7 @@
 	    android:layout_height="wrap_content"  
 	    android:layout_marginTop="220dp"
 	    android:layout_gravity="center_horizontal|center_vertical"
-	    android:src="@drawable/ic_memory"  
+	    android:src="@mipmap/ic_memory"
 	    android:background="#fdfdfd"  
 	    android:scaleType="centerCrop"/>
 </LinearLayout>

@@ -1,101 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:orientation="vertical" 
+    android:orientation="vertical"
+    tools:context="cn.duanyufei.memory.AddActivity">
 
-    tools:context="com.duanyufei.memory.AddActivity">
-    <LinearLayout 
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-    	android:layout_height="wrap_content"
-    	android:baselineAligned="false"
-    	android:orientation="horizontal" >
-		<LinearLayout
-			android:layout_height="45dip"
-			android:layout_width="match_parent"
-			android:orientation="horizontal"
-			android:layout_weight="1"
-			android:gravity="center"
-			android:background="@drawable/abs__ab_bottom_solid_inverse_holo"
-			android:id="@+id/btn_cancel">
-			<ImageView
-				android:id="@+id/btn_cancel_iv"
-				android:contentDescription="@string/btn_cancel"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:src="@drawable/ic_action_cancel"
-			/>
-		  	<TextView
-		 		android:id="@+id/btn_cancel_tv"
-		 		android:layout_width="wrap_content"
-		 		android:layout_height="wrap_content"
-		 		android:text="@string/btn_cancel"
-		 		android:textColor="#FFFFFF"
-		 		android:layout_marginLeft="15dip"
-		 		android:textSize="16sp"
-		 		android:layout_gravity="center_horizontal|center_vertical"
-		 	/>
-	 	</LinearLayout>
-	 	<LinearLayout
-			android:layout_height="45dip"
-			android:layout_width="match_parent"
-			android:orientation="horizontal"
-			android:layout_weight="1"
-			android:gravity="center"
-			android:background="@drawable/abs__ab_bottom_solid_inverse_holo"
-			android:id="@+id/btn_ok">
-			<ImageView
-				android:id="@+id/btn_ok_iv"
-				android:contentDescription="@string/btn_cancel"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:src="@drawable/ic_action_tick"
-			/>
-		  	<TextView
-		 		android:id="@+id/btn_ok_tv"
-		 		android:layout_width="wrap_content"
-		 		android:layout_height="wrap_content"
-		 		android:text="@string/btn_ok"
-		 		android:textColor="#FFFFFF"
-		 		android:layout_marginLeft="15dip"
-		 		android:textSize="16sp"
-		 		android:layout_gravity="center_horizontal|center_vertical"
-		 	/>
-	 	</LinearLayout>
- 	</LinearLayout>
- 	<TextView 
- 	    android:layout_width="wrap_content"
- 	    android:layout_height="wrap_content"
- 	    android:textSize="16sp"
- 	    android:layout_marginLeft="10dip"
- 	    android:layout_marginTop="20dip"
- 	    android:text="@string/msg_name"/>
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
- 	<EditText
- 	    android:id="@+id/mname"
- 	    android:layout_width="match_parent"
- 	    android:layout_height="wrap_content"
- 	    android:layout_marginLeft="15dip"
- 	    android:layout_marginRight="15dip"
- 	    android:inputType="text" />
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
 
- 	<TextView 
- 	    android:layout_width="wrap_content"
- 	    android:layout_height="wrap_content"
- 	    android:textSize="16sp"
- 	    android:layout_marginLeft="10dip"
- 	    android:layout_marginTop="30dip"
- 	    android:text="@string/msg_date"/>
-	<DatePicker
-	    android:id="@+id/add_dp"
-	    android:layout_marginTop="10dip"
-	    android:layout_gravity="center_horizontal"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:calendarViewShown="false"
-		/>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp">
+
+        <AutoCompleteTextView
+            android:id="@+id/mname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/msg_name"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:textSize="16sp" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/msg_date"
+        android:textColor="@color/accent"
+        android:textSize="16sp" />
+
+    <DatePicker
+        android:id="@+id/add_dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:calendarViewShown="false" />
 
 </LinearLayout>
 	
