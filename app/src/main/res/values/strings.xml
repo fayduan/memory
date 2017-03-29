@@ -25,4 +25,7 @@
 	<string name="update_error">检查更新时发生错误</string>
 	<string name="button_ok">好的</string>
 	<string name="button_later">以后再说</string>
+
+	<string name="add">添加</string>
+	<string name="empty">没有填纪念什么哦~</string>
 </resources>

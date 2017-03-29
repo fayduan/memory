@@ -1,19 +1,19 @@
 package cn.duanyufei.memory;
 
-import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.MotionEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.widget.DatePicker;
 import android.widget.DatePicker.OnDateChangedListener;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.util.Calendar;
@@ -21,10 +21,8 @@ import java.util.Calendar;
 import cn.duanyufei.db.DBDao;
 import cn.duanyufei.model.Memory;
 
-public class AddActivity extends Activity {
+public class AddActivity extends AppCompatActivity {
 
-    private LinearLayout btn_cancel;
-    private LinearLayout btn_ok;
     private EditText mname;
     private DatePicker dp;
     private DBDao dao;
@@ -41,10 +39,16 @@ public class AddActivity extends Activity {
         id = get.getIntExtra("id", -1);
 
         setContentView(R.layout.activity_add);
-        //btn_ok = (LinearLayout) findViewById(R.id.btn_ok);
-//        btn_ok.setClickable(true);
-//        btn_ok.setOnTouchListener(touch_ok);
-//        btn_ok.setOnClickListener(click_ok);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddActivity.this.finish();
+            }
+        });
+
         mname = (EditText) findViewById(R.id.mname);
         dp = (DatePicker) findViewById(R.id.add_dp);
         calendar = Calendar.getInstance();
@@ -69,68 +73,36 @@ public class AddActivity extends Activity {
 
     }
 
-    public OnClickListener click_cancel = new OnClickListener() {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.add, menu);
+        return true;
+    }
 
-        @Override
-        public void onClick(View v) {
-            Toast.makeText(getApplicationContext(), "????,??????...", Toast.LENGTH_SHORT).show();
-            backMain();
-        }
-    };
-    public OnClickListener click_ok = new OnClickListener() {
-
-        @Override
-        public void onClick(View v) {
-            //
-            String text = mname.getText().toString();
-            if (!text.isEmpty()) {
-                if (id != -1) {
-                    //Toast.makeText(getApplicationContext(), id+text+calendar.toString(), Toast.LENGTH_SHORT).show();
-                    dao.update(id, text, calendar.getTime());
-                    int appWidgetId = ConfigActivity.getAwID(context, id);
-                    AppWidgetManager awm = AppWidgetManager.getInstance(context);
-                    MyAppWidgetProvider.sendMsg(context, awm, appWidgetId, id);
-                    Log.i("minor", "1sendmsg,appWidgetID=" + appWidgetId + ",MID=" + id);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_done:
+                String text = mname.getText().toString();
+                if (!text.isEmpty()) {
+                    if (id != -1) {
+                        //Toast.makeText(getApplicationContext(), id+text+calendar.toString(), Toast.LENGTH_SHORT).show();
+                        dao.update(id, text, calendar.getTime());
+                        int appWidgetId = ConfigActivity.getAwID(context, id);
+                        AppWidgetManager awm = AppWidgetManager.getInstance(context);
+                        MyAppWidgetProvider.sendMsg(context, awm, appWidgetId, id);
+                        Log.i("minor", "1sendmsg,appWidgetID=" + appWidgetId + ",MID=" + id);
+                    } else {
+                        dao.add(text, calendar.getTime());
+                    }
+                    this.finish();
                 } else {
-                    dao.add(text, calendar.getTime());
+                    Toast.makeText(getApplicationContext(), R.string.empty, Toast.LENGTH_SHORT).show();
                 }
-                backMain();
-            } else {
-                Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
-            }
+                break;
+
         }
-    };
-
-    public OnTouchListener touch_cancel = new OnTouchListener() {
-
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                btn_cancel.setBackgroundColor(getResources().getColor(R.color.background_lightdark));
-            } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                btn_cancel.setBackgroundColor(getResources().getColor(R.color.background_dark));
-            }
-            return false;
-        }
-    };
-
-    public OnTouchListener touch_ok = new OnTouchListener() {
-
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                btn_ok.setBackgroundColor(getResources().getColor(R.color.background_lightdark));
-            } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                btn_ok.setBackgroundColor(getResources().getColor(R.color.background_dark));
-            }
-            return false;
-        }
-    };
-
-    private void backMain() {
-        Intent mainIntent = new Intent();
-        mainIntent.setClass(AddActivity.this, MainActivity.class);
-        AddActivity.this.startActivity(mainIntent);
-        AddActivity.this.finish();
+        return super.onOptionsItemSelected(item);
     }
 }
