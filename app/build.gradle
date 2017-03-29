@@ -56,7 +56,7 @@ android {
 def renameAPK(variant, defaultConfig) {
     variant.outputs.each { output ->
         def file = output.packageApplication.outputFile
-        def fileName = "KiwiVM_" + defaultConfig.versionName + ".apk"
+        def fileName = "Memory_" + defaultConfig.versionName + ".apk"
         output.packageApplication.outputFile = new File(file.parent, fileName)
     }
 }
