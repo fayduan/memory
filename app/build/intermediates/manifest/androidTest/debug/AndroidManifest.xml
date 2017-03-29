@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.minor.memory.test">
+    package="cn.duanyufei.memory.test">
 
-    <uses-sdk android:minSdkVersion="15" android:targetSdkVersion="15" />
+    <uses-sdk android:minSdkVersion="19" android:targetSdkVersion="25" />
 
     <application>
         <uses-library android:name="android.test.runner" />
     </application>
 
     <instrumentation android:name="android.test.InstrumentationTestRunner"
-                     android:targetPackage="com.minor.memory"
+                     android:targetPackage="cn.duanyufei.memory"
                      android:handleProfiling="false"
                      android:functionalTest="false"
-                     android:label="Tests for com.minor.memory"/>
+                     android:label="Tests for cn.duanyufei.memory"/>
 </manifest>

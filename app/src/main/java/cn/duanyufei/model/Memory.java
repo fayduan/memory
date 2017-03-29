@@ -1,4 +1,4 @@
-package com.minor.model;
+package cn.duanyufei.model;
 
 import java.util.Calendar;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package com.minor.db;
+package cn.duanyufei.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

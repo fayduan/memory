@@ -1,4 +1,4 @@
-package com.minor.memory;
+package cn.duanyufei.memory;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -18,8 +18,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.minor.db.DBDao;
-import com.minor.model.Memory;
+import cn.duanyufei.db.DBDao;
+import cn.duanyufei.model.Memory;
 
 import java.util.List;
 

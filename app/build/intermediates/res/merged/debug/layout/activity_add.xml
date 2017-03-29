@@ -6,7 +6,7 @@
     android:background="#FFFFFF"
     android:orientation="vertical" 
 
-    tools:context="com.minor.memory.AddActivity">
+    tools:context="com.duanyufei.memory.AddActivity">
     <LinearLayout 
         android:layout_width="match_parent"
     	android:layout_height="wrap_content"

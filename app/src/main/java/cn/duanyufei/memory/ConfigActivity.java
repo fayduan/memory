@@ -1,33 +1,23 @@
-package com.minor.memory;
+package cn.duanyufei.memory;
 
 import java.util.List;
 
-import com.minor.db.DBDao;
-import com.minor.memory.MainActivity.MyAdapter;
-import com.minor.model.Memory;
+import cn.duanyufei.db.DBDao;
+import cn.duanyufei.model.Memory;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.DialogInterface.OnClickListener;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
 
 public class ConfigActivity extends Activity {
 
@@ -116,7 +106,7 @@ public class ConfigActivity extends Activity {
 		
 	}
 	OnItemClickListener itemListener = new OnItemClickListener() {  
-		//µã»÷
+		//ï¿½ï¿½ï¿½
         @Override  
         public void onItemClick(AdapterView<?> parent, View view, int position,  
                 long id) {  

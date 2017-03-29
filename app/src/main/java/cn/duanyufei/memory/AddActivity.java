@@ -1,10 +1,9 @@
-package com.minor.memory;
+package cn.duanyufei.memory;
 
 import java.util.Calendar;
-import java.util.Date;
 
-import com.minor.db.DBDao;
-import com.minor.model.Memory;
+import cn.duanyufei.db.DBDao;
+import cn.duanyufei.model.Memory;
 
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
@@ -15,7 +14,6 @@ import android.widget.DatePicker;
 import android.widget.DatePicker.OnDateChangedListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.graphics.Color;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -79,7 +77,7 @@ public class AddActivity extends Activity {
 			
 		@Override
 		public void onClick(View v) {
-			Toast.makeText(getApplicationContext(), "°¡¹þ,Õ¦È¡ÏûÁË...", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), "ï¿½ï¿½ï¿½ï¿½,Õ¦È¡ï¿½ï¿½ï¿½ï¿½...", Toast.LENGTH_SHORT).show();
 			backMain();
 		}
 	};
@@ -102,7 +100,7 @@ public class AddActivity extends Activity {
 				}
 				backMain();
 			}else {
-				Toast.makeText(getApplicationContext(), "²»Ìî¼ÍÄîÊ²Ã´¿ÓÎÒÄØ?±»·¢ÏÖÁË°É", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê²Ã´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë°ï¿½", Toast.LENGTH_SHORT).show();
 			}
 		}
 	};

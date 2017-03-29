@@ -3,7 +3,7 @@
  * <p/>
  * desc：文件描述
  */
-package com.minor.app;
+package cn.duanyufei.app;
 
 /**
  * desc：全局配置文件

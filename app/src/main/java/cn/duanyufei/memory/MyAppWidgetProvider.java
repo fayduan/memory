@@ -1,7 +1,7 @@
-package com.minor.memory;
+package cn.duanyufei.memory;
 
-import com.minor.db.DBDao;
-import com.minor.model.Memory;
+import cn.duanyufei.db.DBDao;
+import cn.duanyufei.model.Memory;
 
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;

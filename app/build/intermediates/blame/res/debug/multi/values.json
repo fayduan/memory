@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/home/fay/Code/Memory/app/build/intermediates/res/merged/debug/values/values.xml",
+        "outputFile": "D:\\home\\fay\\Code\\Memory\\app\\build\\intermediates\\res\\merged\\debug\\values\\values.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 100
                 },
                 "from": {
-                    "file": "/home/fay/Code/Memory/app/src/main/res/values/colors.xml",
+                    "file": "D:\\home\\fay\\Code\\Memory\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -30,7 +30,7 @@
                     "endOffset": 155
                 },
                 "from": {
-                    "file": "/home/fay/Code/Memory/app/src/main/res/values/colors.xml",
+                    "file": "D:\\home\\fay\\Code\\Memory\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -49,7 +49,7 @@
                     "endOffset": 195
                 },
                 "from": {
-                    "file": "/home/fay/Code/Memory/app/src/main/res/values/colors.xml",
+                    "file": "D:\\home\\fay\\Code\\Memory\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
@@ -68,7 +68,7 @@
                     "endOffset": 239
                 },
                 "from": {
-                    "file": "/home/fay/Code/Memory/app/src/main/res/values/colors.xml",
+                    "file": "D:\\home\\fay\\Code\\Memory\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,
@@ -87,7 +87,7 @@
                     "endOffset": 284
                 },
                 "from": {
-                    "file": "/home/fay/Code/Memory/app/src/main/res/values/colors.xml",
+                    "file": "D:\\home\\fay\\Code\\Memory\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
@@ -106,7 +106,7 @@
                     "endOffset": 322
                 },
                 "from": {
-                    "file": "/home/fay/Code/Memory/app/src/main/res/values/colors.xml",
+                    "file": "D:\\home\\fay\\Code\\Memory\\app\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -125,7 +125,7 @@
                     "endOffset": 380
                 },
                 "from": {
-                    "file": "/home/fay/Code/Memory/app/src/main/res/values/dimens.xml",
+                    "file": "D:\\home\\fay\\Code\\Memory\\app\\src\\main\\res\\values\\dimens.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -144,7 +144,7 @@
                     "endOffset": 436
                 },
                 "from": {
-                    "file": "/home/fay/Code/Memory/app/src/main/res/values/dimens.xml",
+                    "file": "D:\\home\\fay\\Code\\Memory\\app\\src\\main\\res\\values\\dimens.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -163,7 +163,7 @@
                     "endOffset": 479
                 },
                 "from": {
-                    "file": "/home/fay/Code/Memory/app/src/main/res/values/strings.xml",
+                    "file": "D:\\home\\fay\\Code\\Memory\\app\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 8,
                         "startColumn": 4,
@@ -182,7 +182,7 @@
                     "endOffset": 532
                 },
                 "from": {
-                    "file": "/home/fay/Code/Memory/app/src/main/res/values/strings.xml",
+                    "file": "D:\\home\\fay\\Code\\Memory\\app\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
@@ -201,7 +201,7 @@
                     "endOffset": 576
                 },
                 "from": {
-                    "file": "/home/fay/Code/Memory/app/src/main/res/values/strings.xml",
+                    "file": "D:\\home\\fay\\Code\\Memory\\app\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -220,7 +220,7 @@
                     "endOffset": 618
                 },
                 "from": {
-                    "file": "/home/fay/Code/Memory/app/src/main/res/values/strings.xml",
+                    "file": "D:\\home\\fay\\Code\\Memory\\app\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 13,
                         "startColumn": 1,
@@ -239,7 +239,7 @@
                     "endOffset": 656
                 },
                 "from": {
-                    "file": "/home/fay/Code/Memory/app/src/main/res/values/strings.xml",
+                    "file": "D:\\home\\fay\\Code\\Memory\\app\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 12,
                         "startColumn": 1,
@@ -258,7 +258,7 @@
                     "endOffset": 709
                 },
                 "from": {
-                    "file": "/home/fay/Code/Memory/app/src/main/res/values/strings.xml",
+                    "file": "D:\\home\\fay\\Code\\Memory\\app\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
@@ -277,7 +277,7 @@
                     "endOffset": 753
                 },
                 "from": {
-                    "file": "/home/fay/Code/Memory/app/src/main/res/values/strings.xml",
+                    "file": "D:\\home\\fay\\Code\\Memory\\app\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 11,
                         "startColumn": 1,
@@ -296,7 +296,7 @@
                     "endOffset": 798
                 },
                 "from": {
-                    "file": "/home/fay/Code/Memory/app/src/main/res/values/strings.xml",
+                    "file": "D:\\home\\fay\\Code\\Memory\\app\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 9,
                         "startColumn": 1,
@@ -315,7 +315,7 @@
                     "endOffset": 840
                 },
                 "from": {
-                    "file": "/home/fay/Code/Memory/app/src/main/res/values/strings.xml",
+                    "file": "D:\\home\\fay\\Code\\Memory\\app\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 10,
                         "startColumn": 1,
@@ -334,7 +334,7 @@
                     "endOffset": 882
                 },
                 "from": {
-                    "file": "/home/fay/Code/Memory/app/src/main/res/values/strings.xml",
+                    "file": "D:\\home\\fay\\Code\\Memory\\app\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 15,
                         "startColumn": 1,
@@ -353,7 +353,7 @@
                     "endOffset": 926
                 },
                 "from": {
-                    "file": "/home/fay/Code/Memory/app/src/main/res/values/strings.xml",
+                    "file": "D:\\home\\fay\\Code\\Memory\\app\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,
@@ -372,7 +372,7 @@
                     "endOffset": 968
                 },
                 "from": {
-                    "file": "/home/fay/Code/Memory/app/src/main/res/values/strings.xml",
+                    "file": "D:\\home\\fay\\Code\\Memory\\app\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 14,
                         "startColumn": 1,
@@ -391,7 +391,7 @@
                     "endOffset": 1023
                 },
                 "from": {
-                    "file": "/home/fay/Code/Memory/app/src/main/res/values/strings.xml",
+                    "file": "D:\\home\\fay\\Code\\Memory\\app\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 16,
                         "startColumn": 1,
@@ -410,7 +410,7 @@
                     "endOffset": 1063
                 },
                 "from": {
-                    "file": "/home/fay/Code/Memory/app/src/main/res/values/strings.xml",
+                    "file": "D:\\home\\fay\\Code\\Memory\\app\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -430,7 +430,7 @@
                     "endOffset": 1354
                 },
                 "from": {
-                    "file": "/home/fay/Code/Memory/app/src/main/res/values/styles.xml",
+                    "file": "D:\\home\\fay\\Code\\Memory\\app\\src\\main\\res\\values\\styles.xml",
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,
@@ -451,7 +451,472 @@
                     "endOffset": 1514
                 },
                 "from": {
-                    "file": "/home/fay/Code/Memory/app/src/main/res/values/styles.xml",
+                    "file": "D:\\home\\fay\\Code\\Memory\\app\\src\\main\\res\\values\\styles.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 4,
+                        "startOffset": 522,
+                        "endLine": 17,
+                        "endColumn": 12,
+                        "endOffset": 679
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "outputFile": "D:\\projects\\memory\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 49,
+                    "endOffset": 100
+                },
+                "from": {
+                    "file": "D:\\projects\\memory\\app\\src\\main\\res\\values\\colors.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 57,
+                        "endColumn": 49,
+                        "endOffset": 102
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 105,
+                    "endColumn": 54,
+                    "endOffset": 155
+                },
+                "from": {
+                    "file": "D:\\projects\\memory\\app\\src\\main\\res\\values\\colors.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 108,
+                        "endColumn": 54,
+                        "endOffset": 158
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 160,
+                    "endColumn": 39,
+                    "endOffset": 195
+                },
+                "from": {
+                    "file": "D:\\projects\\memory\\app\\src\\main\\res\\values\\colors.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 203,
+                        "endColumn": 39,
+                        "endOffset": 238
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 200,
+                    "endColumn": 43,
+                    "endOffset": 239
+                },
+                "from": {
+                    "file": "D:\\projects\\memory\\app\\src\\main\\res\\values\\colors.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 244,
+                        "endColumn": 43,
+                        "endOffset": 283
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 244,
+                    "endColumn": 44,
+                    "endOffset": 284
+                },
+                "from": {
+                    "file": "D:\\projects\\memory\\app\\src\\main\\res\\values\\colors.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 289,
+                        "endColumn": 44,
+                        "endOffset": 329
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 289,
+                    "endColumn": 37,
+                    "endOffset": 322
+                },
+                "from": {
+                    "file": "D:\\projects\\memory\\app\\src\\main\\res\\values\\colors.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 164,
+                        "endColumn": 37,
+                        "endOffset": 197
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 8,
+                    "startColumn": 4,
+                    "startOffset": 327,
+                    "endColumn": 57,
+                    "endOffset": 380
+                },
+                "from": {
+                    "file": "D:\\projects\\memory\\app\\src\\main\\res\\values\\dimens.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 92,
+                        "endColumn": 57,
+                        "endOffset": 145
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 9,
+                    "startColumn": 4,
+                    "startOffset": 385,
+                    "endColumn": 55,
+                    "endOffset": 436
+                },
+                "from": {
+                    "file": "D:\\projects\\memory\\app\\src\\main\\res\\values\\dimens.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 151,
+                        "endColumn": 55,
+                        "endOffset": 202
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 10,
+                    "startColumn": 4,
+                    "startOffset": 441,
+                    "endColumn": 42,
+                    "endOffset": 479
+                },
+                "from": {
+                    "file": "D:\\projects\\memory\\app\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 294,
+                        "endColumn": 42,
+                        "endOffset": 332
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 11,
+                    "startColumn": 4,
+                    "startOffset": 484,
+                    "endColumn": 52,
+                    "endOffset": 532
+                },
+                "from": {
+                    "file": "D:\\projects\\memory\\app\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 241,
+                        "endColumn": 52,
+                        "endOffset": 289
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 12,
+                    "startColumn": 4,
+                    "startOffset": 537,
+                    "endColumn": 43,
+                    "endOffset": 576
+                },
+                "from": {
+                    "file": "D:\\projects\\memory\\app\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 58,
+                        "endColumn": 43,
+                        "endOffset": 97
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 13,
+                    "startColumn": 4,
+                    "startOffset": 581,
+                    "endColumn": 41,
+                    "endOffset": 618
+                },
+                "from": {
+                    "file": "D:\\projects\\memory\\app\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 13,
+                        "startColumn": 1,
+                        "startOffset": 491,
+                        "endColumn": 38,
+                        "endOffset": 528
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 14,
+                    "startColumn": 4,
+                    "startOffset": 623,
+                    "endColumn": 37,
+                    "endOffset": 656
+                },
+                "from": {
+                    "file": "D:\\projects\\memory\\app\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 1,
+                        "startOffset": 456,
+                        "endColumn": 34,
+                        "endOffset": 489
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 15,
+                    "startColumn": 4,
+                    "startOffset": 661,
+                    "endColumn": 52,
+                    "endOffset": 709
+                },
+                "from": {
+                    "file": "D:\\projects\\memory\\app\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 143,
+                        "endColumn": 52,
+                        "endOffset": 191
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 16,
+                    "startColumn": 4,
+                    "startOffset": 714,
+                    "endColumn": 43,
+                    "endOffset": 753
+                },
+                "from": {
+                    "file": "D:\\projects\\memory\\app\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 11,
+                        "startColumn": 1,
+                        "startOffset": 415,
+                        "endColumn": 40,
+                        "endOffset": 454
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 17,
+                    "startColumn": 4,
+                    "startOffset": 758,
+                    "endColumn": 44,
+                    "endOffset": 798
+                },
+                "from": {
+                    "file": "D:\\projects\\memory\\app\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 1,
+                        "startOffset": 334,
+                        "endColumn": 41,
+                        "endOffset": 374
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 18,
+                    "startColumn": 4,
+                    "startOffset": 803,
+                    "endColumn": 41,
+                    "endOffset": 840
+                },
+                "from": {
+                    "file": "D:\\projects\\memory\\app\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 1,
+                        "startOffset": 376,
+                        "endColumn": 38,
+                        "endOffset": 413
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 19,
+                    "startColumn": 4,
+                    "startOffset": 845,
+                    "endColumn": 41,
+                    "endOffset": 882
+                },
+                "from": {
+                    "file": "D:\\projects\\memory\\app\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 1,
+                        "startOffset": 569,
+                        "endColumn": 38,
+                        "endOffset": 606
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 20,
+                    "startColumn": 4,
+                    "startOffset": 887,
+                    "endColumn": 43,
+                    "endOffset": 926
+                },
+                "from": {
+                    "file": "D:\\projects\\memory\\app\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 196,
+                        "endColumn": 43,
+                        "endOffset": 235
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 21,
+                    "startColumn": 4,
+                    "startOffset": 931,
+                    "endColumn": 41,
+                    "endOffset": 968
+                },
+                "from": {
+                    "file": "D:\\projects\\memory\\app\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 14,
+                        "startColumn": 1,
+                        "startOffset": 530,
+                        "endColumn": 38,
+                        "endOffset": 567
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 22,
+                    "startColumn": 4,
+                    "startOffset": 973,
+                    "endColumn": 54,
+                    "endOffset": 1023
+                },
+                "from": {
+                    "file": "D:\\projects\\memory\\app\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 16,
+                        "startColumn": 1,
+                        "startOffset": 608,
+                        "endColumn": 51,
+                        "endOffset": 658
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 23,
+                    "startColumn": 4,
+                    "startOffset": 1028,
+                    "endColumn": 39,
+                    "endOffset": 1063
+                },
+                "from": {
+                    "file": "D:\\projects\\memory\\app\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 102,
+                        "endColumn": 39,
+                        "endOffset": 137
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 24,
+                    "startColumn": 4,
+                    "startOffset": 1068,
+                    "endLine": 30,
+                    "endColumn": 12,
+                    "endOffset": 1354
+                },
+                "from": {
+                    "file": "D:\\projects\\memory\\app\\src\\main\\res\\values\\styles.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 191,
+                        "endLine": 12,
+                        "endColumn": 12,
+                        "endOffset": 481
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 31,
+                    "startColumn": 4,
+                    "startOffset": 1359,
+                    "endLine": 33,
+                    "endColumn": 12,
+                    "endOffset": 1514
+                },
+                "from": {
+                    "file": "D:\\projects\\memory\\app\\src\\main\\res\\values\\styles.xml",
                     "position": {
                         "startLine": 15,
                         "startColumn": 4,

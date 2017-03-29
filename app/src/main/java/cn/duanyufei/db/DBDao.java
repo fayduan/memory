@@ -1,13 +1,11 @@
-package com.minor.db;
+package cn.duanyufei.db;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import com.minor.model.Memory;
+import cn.duanyufei.model.Memory;
 
 import android.content.Context;
 import android.database.Cursor;

@@ -1,4 +1,4 @@
-package com.minor.memory;
+package cn.duanyufei.memory;
 
 import android.app.Activity;
 import android.content.Intent;

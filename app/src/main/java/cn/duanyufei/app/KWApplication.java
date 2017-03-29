@@ -1,4 +1,4 @@
-package com.minor.app;
+package cn.duanyufei.app;
 
 import android.app.Application;
 import android.content.Context;

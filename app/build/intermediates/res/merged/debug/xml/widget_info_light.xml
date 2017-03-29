@@ -6,5 +6,5 @@
         android:updatePeriodMillis="14400000"
         android:initialLayout="@layout/widget_view_light"
         android:resizeMode="horizontal|vertical"
-        android:configure="com.minor.memory.ConfigActivity">
+        android:configure="cn.duanyufei.memory.ConfigActivity">
 </appwidget-provider>
