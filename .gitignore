@@ -1,7 +1,7 @@
 *.iml
 .gradle
 /local.properties
-/.idea
+.idea
 .DS_Store
 /build
 /captures
@@ -9,7 +9,6 @@
 *.jks
 gradle.properties
 app/Memory_*.apk
-.idea/misc.xml
 projectFilesBackup/.idea/workspace.xml
 .idea/
 app/build/
