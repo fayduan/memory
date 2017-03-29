@@ -1,23 +1,66 @@
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 20
-    buildToolsVersion "24.0.0"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
 
     defaultConfig {
-        applicationId "com.minor.memory"
-        minSdkVersion 15
-        targetSdkVersion 15
-    }
+        applicationId "cn.duanyufei.memory"
+        minSdkVersion 19
+        targetSdkVersion 25
+        versionCode 6
+        versionName "v0.0.5"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        String version_tag = project.hasProperty("TRAVIS_TAG") ? TRAVIS_TAG : System.getenv("TRAVIS_TAG")
+        if (version_tag != null) {
+            Pattern pattern = Pattern.compile("v(\\d+)\\.(\\d+)\\.(\\d+)")
+            Matcher matcher = pattern.matcher(version_tag)
+            if (matcher.find()) {
+                String vn = matcher.group(0)
+                int v1 = Integer.parseInt(matcher.group(1))
+                int v2 = Integer.parseInt(matcher.group(2))
+                int v3 = Integer.parseInt(matcher.group(3))
+                versionCode v1 * 1000000 + v2 * 1000 + v3 + 1
+                versionName vn
+            }
+        }
+    }
+    signingConfigs {
+        releaseConfig {
+            storeFile file("../fayduan.jks")
+            storePassword project.hasProperty("KEYSTORE_PWD") ? KEYSTORE_PWD : System.getenv("KEYSTORE_PWD")
+            keyAlias project.hasProperty("ALIAS_NAME") ? ALIAS_NAME : System.getenv("ALIAS_NAME")
+            keyPassword project.hasProperty("ALIAS_PWD") ? ALIAS_PWD : System.getenv("ALIAS_PWD")
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.releaseConfig
+            applicationVariants.all { variant ->
+                renameAPK(variant, defaultConfig)
+            }
         }
+    }
+    buildTypes.each {
+        it.buildConfigField 'String', 'FIR_TOKEN', project.hasProperty("FIR_TOKEN_STR") ? FIR_TOKEN_STR : System.getenv("FIR_TOKEN_STR")
+    }
+
+}
+
+def renameAPK(variant, defaultConfig) {
+    variant.outputs.each { output ->
+        def file = output.packageApplication.outputFile
+        def fileName = "KiwiVM_" + defaultConfig.versionName + ".apk"
+        output.packageApplication.outputFile = new File(file.parent, fileName)
     }
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:20.0.0'
+    compile 'com.android.support:support-v4:25.3.0'
 }
