@@ -8,22 +8,22 @@ import android.content.pm.PackageManager;
  * Created by DUAN Yufei on 2017/3/13.
  */
 
-public class KWApplication extends Application {
+public class MApplication extends Application {
 
     // Global context;
     private static Context context;
 
-    private static final String TAG = "KWApplication";
+    private static final String TAG = "MApplication";
 
     private static final String INTERNAL_VERSION = "Internal Version: ";
     private static final String VERSION = "Version V";
     private static final String SVN = "SVN: ";
-    private static KWApplication instance = null;
+    private static MApplication instance = null;
 
     private static String mVersion = null;
     private static int mVersionCode = 1;
 
-    public static KWApplication getInstance() {
+    public static MApplication getInstance() {
         return instance;
     }
 

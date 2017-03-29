@@ -63,4 +63,6 @@ def renameAPK(variant, defaultConfig) {
 
 dependencies {
     compile 'com.android.support:support-v4:25.3.0'
+    compile 'com.squareup.okhttp:okhttp:2.7.5'
+    compile 'com.squareup.okio:okio:1.11.0'
 }
