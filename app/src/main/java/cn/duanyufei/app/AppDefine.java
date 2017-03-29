@@ -9,7 +9,6 @@ import cn.duanyufei.memory.BuildConfig;
 
 /**
  * desc：全局配置文件
- *
  */
 public class AppDefine {
 

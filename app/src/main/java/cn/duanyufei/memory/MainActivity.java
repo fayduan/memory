@@ -152,7 +152,7 @@ public class MainActivity extends Activity {
             }
             return view;
             /*
-			ViewHolder holder = null;  
+            ViewHolder holder = null;
             if (arg1 == null) {  
             // 获得ViewHolder对象  
             holder = new ViewHolder();  
