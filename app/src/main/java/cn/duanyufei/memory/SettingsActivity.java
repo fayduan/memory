@@ -1,11 +1,18 @@
 package cn.duanyufei.memory;
 
+import android.appwidget.AppWidgetManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.RadioGroup;
 
+import java.util.List;
+
+import cn.duanyufei.db.DBDao;
+import cn.duanyufei.model.Memory;
 import cn.duanyufei.util.StorageUtil;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -16,6 +23,16 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SettingsActivity.this.finish();
+            }
+        });
+
         colorGroup = (RadioGroup) findViewById(R.id.rdo_color);
         if (StorageUtil.getColor() == 0) {
             colorGroup.check(R.id.rdo_color_white);
@@ -41,8 +58,24 @@ public class SettingsActivity extends AppCompatActivity {
                 } else {
                     StorageUtil.setColor(1);
                 }
+                updateWidget();
+                this.finish();
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void updateWidget() {
+        DBDao dao = new DBDao(this);
+        List<Memory> list = dao.findAll();
+        for (int i = 0; i < list.size(); i++) {
+            int appWidgetId = ConfigActivity.getAwID(this, list.get(i).getId());
+            if (appWidgetId > 0) {
+                AppWidgetManager awm = AppWidgetManager.getInstance(this);
+                MyAppWidgetProvider.sendMsg(this, awm, appWidgetId, list.get(i).getId());
+            }
+
+        }
+
     }
 }

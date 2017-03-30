@@ -7,11 +7,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.RemoteViews;
 
 import cn.duanyufei.db.DBDao;
 import cn.duanyufei.model.Memory;
+import cn.duanyufei.util.ColorUtil;
 
 public class MyAppWidgetProvider extends AppWidgetProvider {
 
@@ -102,8 +104,11 @@ public class MyAppWidgetProvider extends AppWidgetProvider {
             views.setTextViewText(R.id.widget_text, m.getText());
             views.setTextViewText(R.id.widget_number, m.getNumber() + "");
             if (m.getType() == 0) {
-                views.setTextColor(R.id.widget_number, context.getResources().getColor(R.color.red));
+                views.setTextColor(R.id.widget_number, ContextCompat.getColor(context, R.color.red));
             }
+            views.setTextColor(R.id.widget_text, ColorUtil.getColor(context));
+            views.setTextColor(R.id.widget_day, ColorUtil.getColor(context));
+
 
             appWidgetManager.updateAppWidget(mAppWidgetID, views);
         } catch (Exception e) {
