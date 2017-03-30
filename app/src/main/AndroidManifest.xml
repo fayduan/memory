@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name="cn.duanyufei.memory.WelcomeActivity"
+            android:name=".WelcomeActivity"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
@@ -24,27 +24,30 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="cn.duanyufei.memory.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name" />
         <activity
-            android:name="cn.duanyufei.memory.AddActivity"
+            android:name=".AddActivity"
             android:label="@string/app_name" />
 
         <receiver
-            android:name="cn.duanyufei.memory.MyAppWidgetProvider"
+            android:name=".MyAppWidgetProvider"
             android:label="Memory">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
+
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_info_light" />
         </receiver>
-        <activity android:name="cn.duanyufei.memory.ConfigActivity">
+
+        <activity android:name=".ConfigActivity">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

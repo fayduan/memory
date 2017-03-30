@@ -101,6 +101,9 @@ public class MyAppWidgetProvider extends AppWidgetProvider {
             views.setOnClickPendingIntent(R.id.ll_widget, pendingIntent);
             views.setTextViewText(R.id.widget_text, m.getText());
             views.setTextViewText(R.id.widget_number, m.getNumber() + "");
+            if (m.getType() == 0) {
+                views.setTextColor(R.id.widget_number, context.getResources().getColor(R.color.red));
+            }
 
             appWidgetManager.updateAppWidget(mAppWidgetID, views);
         } catch (Exception e) {
