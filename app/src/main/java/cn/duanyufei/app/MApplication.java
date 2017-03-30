@@ -21,7 +21,7 @@ public class MApplication extends Application {
     private static MApplication instance = null;
 
     private static String mVersion = null;
-    private static int mVersionCode = 1;
+    private static int mVersionCode = 0;
 
     public static MApplication getInstance() {
         return instance;
