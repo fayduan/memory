@@ -29,4 +29,8 @@
     <string name="add">添加</string>
     <string name="empty">没有填纪念什么哦~</string>
     <string name="select">选择一个纪念日</string>
+
+    <string name="app_widget_color">桌面插件文字颜色</string>
+    <string name="white">白色</string>
+    <string name="black">黑色</string>
 </resources>

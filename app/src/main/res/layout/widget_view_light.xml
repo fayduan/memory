@@ -2,32 +2,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-	<TextView 
+    android:orientation="vertical">
+
+    <TextView
         android:id="@+id/widget_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Memory"
-        android:textSize="15sp"
-        />
-	<LinearLayout
-		android:id="@+id/ll_widget"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:orientation="horizontal" >
-	    <TextView
-	        android:id="@+id/widget_number"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:textColor="#33B6EA"
-	        android:text="9999"
-			android:fontFamily="s"
-	        android:textSize="50sp" />
-	
-	    <TextView
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="@string/msg_main_day"
-	        android:textSize="12sp" />
-	</LinearLayout>
+        android:textSize="15sp" />
+
+    <LinearLayout
+        android:id="@+id/ll_widget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/widget_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="s"
+            android:text="9999"
+            android:textColor="#33B6EA"
+            android:textSize="50sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/msg_main_day"
+            android:textSize="12sp" />
+    </LinearLayout>
 </LinearLayout>

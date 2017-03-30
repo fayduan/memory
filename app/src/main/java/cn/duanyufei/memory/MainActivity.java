@@ -118,7 +118,8 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.menu_settings:
-                Toast.makeText(getApplicationContext(), "设置还没做,嘿嘿嘿~", Toast.LENGTH_SHORT).show();
+                Intent settingsIntent = new Intent(this, SettingsActivity.class);
+                startActivity(settingsIntent);
                 break;
             case R.id.menu_teach:
                 new AlertDialog.Builder(MainActivity.this)
