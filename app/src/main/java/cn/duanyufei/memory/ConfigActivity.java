@@ -6,6 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -19,7 +22,7 @@ import java.util.List;
 import cn.duanyufei.db.DBDao;
 import cn.duanyufei.model.Memory;
 
-public class ConfigActivity extends Activity {
+public class ConfigActivity extends AppCompatActivity {
 
     private int mAppWidgetId;
     private List<Memory> ml;
@@ -36,38 +39,23 @@ public class ConfigActivity extends Activity {
         lv = (ListView) findViewById(R.id.list);
         lv.setOnItemClickListener(itemListener);
 
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setVisibility(View.INVISIBLE);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle(R.string.select);
+
         Intent intent = getIntent();
         Bundle extra = intent.getExtras();
         if (extra != null) {
             mAppWidgetId = extra.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID,
                     AppWidgetManager.INVALID_APPWIDGET_ID);
         }
-    }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Init();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Init();
-    }
-
-    private void Init() {
         dao = new DBDao(ConfigActivity.this);
         ml = dao.findAll();
-        if (ml.size() == 0) {
-//            tv.setVisibility(View.VISIBLE);
-//            lv.setVisibility(View.INVISIBLE);
-//            tv.setText(R.string.msg_nolist);
-        } else {
-//            lv.setVisibility(View.VISIBLE);
-//            tv.setVisibility(View.INVISIBLE);
-//            lv.setAdapter(new MyAdapter());
-        }
+        lv.setAdapter(new MyAdapter());
     }
 
     class MyAdapter extends BaseAdapter {

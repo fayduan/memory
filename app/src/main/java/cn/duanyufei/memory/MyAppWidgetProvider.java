@@ -1,5 +1,6 @@
 package cn.duanyufei.memory;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
@@ -95,6 +96,9 @@ public class MyAppWidgetProvider extends AppWidgetProvider {
             Memory m = dao.find(mID);
             views = new RemoteViews(context.getPackageName(),
                     R.layout.widget_view_light);
+            Intent launchIntent = new Intent(context, MainActivity.class);
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, launchIntent, 0);
+            views.setOnClickPendingIntent(R.id.ll_widget, pendingIntent);
             views.setTextViewText(R.id.widget_text, m.getText());
             views.setTextViewText(R.id.widget_number, m.getNumber() + "");
 
@@ -104,4 +108,6 @@ public class MyAppWidgetProvider extends AppWidgetProvider {
         }
 
     }
+
+
 }
