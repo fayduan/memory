@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         delid = 0;
         setContentView(R.layout.activity_main);
 
+        new UpdateTask(this).update();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -87,7 +89,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void handleMessage(Message msg) {
                 if (msg.what == DEL_TAG) {
-                    init();
+                    ml = dao.findAll();
+                    adapter.notifyDataSetChanged();
                 }
             }
         };
@@ -96,7 +99,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        init();
+        ml = dao.findAll();
+        if (ml.size() == 0) {
+            snackBar.show();
+        }
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -138,15 +145,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void init() {
-        dao = new DBDao(MainActivity.this);
-        ml = dao.findAll();
-        if (ml.size() == 0) {
-            snackBar.show();
-        }
-        adapter.notifyDataSetChanged();
-    }
-
     class MyAdapter extends BaseAdapter {
 
         @Override
@@ -177,29 +175,6 @@ public class MainActivity extends AppCompatActivity {
             }
             Log.i(TAG, "getView: " + memory.getText());
             return view;
-            /*
-            ViewHolder holder = null;
-            if (arg1 == null) {  
-            // 获得ViewHolder对象  
-            holder = new ViewHolder();  
-                // 导入布局并赋值给convertview  
-            arg1 = View.inflate(MainActivity.this , R.layout.list_item , null);
-            holder.tv = (TextView) arg1.findViewById(R.id.tv_item_number);  
-            holder.cb = (CheckBox) arg1.findViewById(R.id.lv_cb);  
-            // 为view设置标签  
-            arg1.setTag(holder);  
-            } else {  
-            // 取出holder  
-            	holder = (ViewHolder) arg1.getTag();  
-            }  
-  
-  
-            // 设置list中TextView的显示  
-	        holder.tv.setText(ml.get(arg0));  
-	        // 根据isSelected来设置checkbox的选中状况  
-	        holder.cb.setChecked(isSelected.get(arg0));  
-	        return arg1; 
-	        */
         }
 
     }
@@ -209,10 +184,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
-            // 这里的view是我们在list.xml中定义的LinearLayout对象.  
-            // 所以可以通过findViewById方法可以找到list.xml中定义的它的子对象,如下:  
-            //Memory m = ml.get(position);
-            //Toast.makeText(getApplicationContext(), m.toString(), Toast.LENGTH_SHORT).show();
             Intent changeIntent = new Intent();
             changeIntent.setClass(MainActivity.this, AddActivity.class);
             changeIntent.putExtra("id", ml.get(position).getId());
@@ -237,30 +208,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     };
-    /*
-    OnItemSelectedListener itemSelectedListener = new OnItemSelectedListener() {
 
-        @Override
-        public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
-                long arg3) {
-            // TODO Auto-generated method stub
-            selected.add(((Memory)ml.get(arg2)).getId());
-            String temp="";
-            for(int i=0;i<selected.size();i++){
-                temp+=selected.get(i).toString();
-                temp+=",";
-            }
-            Toast.makeText(getApplicationContext(), temp, Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> arg0) {
-            //selected.remove(((Memory)ml.get(arg2)).getId());
-
-        }
-
-    };
-    */
     public OnClickListener del_cancel = new OnClickListener() {
 
 
@@ -275,7 +223,6 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(DialogInterface arg0, int arg1) {
             Toast.makeText(getApplicationContext(), "已删除纪念日", Toast.LENGTH_SHORT).show();
             delete(delid);
-            init();
         }
     };
 

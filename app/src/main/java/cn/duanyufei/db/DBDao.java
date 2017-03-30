@@ -54,10 +54,10 @@ public class DBDao {
         db.close();
     }
 
-    public List<Memory> findAll() {
+    synchronized public List<Memory> findAll() {
         SQLiteDatabase db = helper.getWritableDatabase();
         Cursor cursor = db.rawQuery("select * from memory order by mdate desc", null);
-        List<Memory> list = new ArrayList<Memory>();
+        List<Memory> list = new ArrayList<>();
         if (cursor.getCount() == 0) return list;
         while (cursor.moveToNext()) {
             int id = cursor.getInt(cursor.getColumnIndex("id"));
