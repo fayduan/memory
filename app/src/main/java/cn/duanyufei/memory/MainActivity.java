@@ -5,8 +5,13 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,13 +33,19 @@ import cn.duanyufei.util.UpdateTask;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
+
+    private static final int DEL_TAG = 0;
+
     private List<Memory> ml;
     //private List<Integer> selected;
     private DBDao dao;
     private ListView lv;
-    private TextView tv;
     private int delid;
-    //private static HashMap<Integer,Boolean> isSelected;
+    private MyAdapter adapter;
+    private FloatingActionButton fab;
+    private Snackbar snackBar;
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,24 +57,46 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         lv = (ListView) findViewById(R.id.list);
-        tv = (TextView) findViewById(R.id.msg_main);
         lv.setOnItemClickListener(itemListener);
         lv.setOnItemLongClickListener(itemLongListener);
-        //lv.setOnItemSelectedListener(itemSelectedListener);
 
-        //selected = new ArrayList<Integer>();
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent addIntent = new Intent();
+                addIntent.setClass(MainActivity.this, AddActivity.class);
+                MainActivity.this.startActivity(addIntent);
+            }
+        });
+
+        dao = new DBDao(MainActivity.this);
+        ml = dao.findAll();
+        adapter = new MyAdapter();
+        lv.setAdapter(adapter);
+
+        snackBar = Snackbar.make(fab, R.string.msg_nolist, Snackbar.LENGTH_INDEFINITE).setAction(R.string.button_ok, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                snackBar.dismiss();
+            }
+        });
+
+        handler = new Handler() {
+
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == DEL_TAG) {
+                    init();
+                }
+            }
+        };
     }
 
     @Override
-    protected void onRestart() {
-        super.onRestart();
-        Init();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Init();
+    protected void onResume() {
+        super.onResume();
+        init();
     }
 
     @Override
@@ -76,18 +109,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_add:
-                Intent addIntent = new Intent();
-                addIntent.setClass(MainActivity.this, AddActivity.class);
-                MainActivity.this.startActivity(addIntent);
-                break;
+
             case R.id.menu_settings:
                 Toast.makeText(getApplicationContext(), "设置还没做,嘿嘿嘿~", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.menu_teach:
                 new AlertDialog.Builder(MainActivity.this)
                         .setTitle("教笨蛋")
-                        .setMessage("1.功能栏那个\"+\"是添加纪念日用的。" + '\n'
+                        .setMessage("1.点击右下角加号添加纪念日。" + '\n'
                                 + "2.如果添加的是还没到的日子,天数是红色的。" + '\n'
                                 + "3.长按项目删除。" + '\n'
                                 + "4.点击项目编辑。" + '\n'
@@ -109,22 +138,13 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void Init() {
+    private void init() {
         dao = new DBDao(MainActivity.this);
         ml = dao.findAll();
         if (ml.size() == 0) {
-            tv.setVisibility(View.VISIBLE);
-            lv.setVisibility(View.INVISIBLE);
-            tv.setText(R.string.msg_nolist);
-        } else {
-            //isSelected = new HashMap<Integer, Boolean>();
-            //for(int i=0; i<ml.size();i++) {
-            //    isSelected.put(i,false);
-            //}
-            lv.setVisibility(View.VISIBLE);
-            tv.setVisibility(View.INVISIBLE);
-            lv.setAdapter(new MyAdapter());
+            snackBar.show();
         }
+        adapter.notifyDataSetChanged();
     }
 
     class MyAdapter extends BaseAdapter {
@@ -155,6 +175,7 @@ public class MainActivity extends AppCompatActivity {
             if (memory.getType() == 0) {
                 tv_number.setTextColor(getResources().getColor(R.color.red));
             }
+            Log.i(TAG, "getView: " + memory.getText());
             return view;
             /*
             ViewHolder holder = null;
@@ -212,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
                     .setPositiveButton("嗯嗯是的", del_cancel)
                     .setNegativeButton("显然不是", del_ok)
                     .show();
-            return false;
+            return true;
         }
 
     };
@@ -253,8 +274,23 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(DialogInterface arg0, int arg1) {
             Toast.makeText(getApplicationContext(), "已删除纪念日", Toast.LENGTH_SHORT).show();
-            dao.delete(delid);
-            Init();
+            delete(delid);
+            init();
         }
     };
+
+    private void delete(final int delId) {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                dao.delete(delId);
+                Message msg = Message.obtain();
+                msg.obj = null;
+                msg.what = DEL_TAG;
+                handler.sendMessage(msg);
+                Log.i(TAG, "run: send delete");
+            }
+        }).start();
+    }
 }

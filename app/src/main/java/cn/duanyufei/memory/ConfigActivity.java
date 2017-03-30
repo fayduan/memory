@@ -25,7 +25,6 @@ public class ConfigActivity extends Activity {
     private List<Memory> ml;
     private DBDao dao;
     private ListView lv;
-    private TextView tv;
     private Context context;
 
     @Override
@@ -35,7 +34,6 @@ public class ConfigActivity extends Activity {
         context = this;
         setContentView(R.layout.activity_main);
         lv = (ListView) findViewById(R.id.list);
-        tv = (TextView) findViewById(R.id.msg_main);
         lv.setOnItemClickListener(itemListener);
 
         Intent intent = getIntent();
@@ -62,13 +60,13 @@ public class ConfigActivity extends Activity {
         dao = new DBDao(ConfigActivity.this);
         ml = dao.findAll();
         if (ml.size() == 0) {
-            tv.setVisibility(View.VISIBLE);
-            lv.setVisibility(View.INVISIBLE);
-            tv.setText(R.string.msg_nolist);
+//            tv.setVisibility(View.VISIBLE);
+//            lv.setVisibility(View.INVISIBLE);
+//            tv.setText(R.string.msg_nolist);
         } else {
-            lv.setVisibility(View.VISIBLE);
-            tv.setVisibility(View.INVISIBLE);
-            lv.setAdapter(new MyAdapter());
+//            lv.setVisibility(View.VISIBLE);
+//            tv.setVisibility(View.INVISIBLE);
+//            lv.setAdapter(new MyAdapter());
         }
     }
 

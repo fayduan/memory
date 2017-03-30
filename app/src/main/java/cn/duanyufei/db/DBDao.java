@@ -58,6 +58,7 @@ public class DBDao {
         SQLiteDatabase db = helper.getWritableDatabase();
         Cursor cursor = db.rawQuery("select * from memory order by mdate desc", null);
         List<Memory> list = new ArrayList<Memory>();
+        if (cursor.getCount() == 0) return list;
         while (cursor.moveToNext()) {
             int id = cursor.getInt(cursor.getColumnIndex("id"));
             String text = cursor.getString(cursor.getColumnIndex("text"));
