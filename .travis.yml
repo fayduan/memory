@@ -38,7 +38,7 @@ deploy:
   file_glob: true
   file: app/build/outputs/apk/Memory*.apk
   on:
-    tag: true
+    tags: true
     repo: fayduan/memory
 after_deploy:
   - fir p app/build/outputs/apk/Memory*.apk -T $FIR_TOKEN -c "`git cat-file tag $TRAVIS_TAG`"
