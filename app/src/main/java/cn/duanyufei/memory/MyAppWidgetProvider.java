@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.widget.RemoteViews;
 
 import cn.duanyufei.db.DBDao;
@@ -83,12 +82,12 @@ public class MyAppWidgetProvider extends AppWidgetProvider {
         message.arg1 = appWidgetId;
         message.arg2 = mId;
         handler.sendMessage(message);
-        Log.i("minor", "2sendmsg,appWidgetID=" + appWidgetId + ",MID=" + mId);
+//        Log.i("minor", "2sendmsg,appWidgetID=" + appWidgetId + ",MID=" + mId);
     }
 
     public static void updateView(Context context,
                                   AppWidgetManager appWidgetManager, Message msg) {
-        Log.i("minor", "update,appWidgetID=" + msg.arg1 + ",MID=" + msg.arg2);
+//        Log.i("minor", "update,appWidgetID=" + msg.arg1 + ",MID=" + msg.arg2);
         try {
             DBDao dao = new DBDao(context);
             RemoteViews views = null;

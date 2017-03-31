@@ -1,6 +1,7 @@
 package cn.duanyufei.memory;
 
 import android.appwidget.AppWidgetManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -58,21 +59,21 @@ public class SettingsActivity extends AppCompatActivity {
                 } else {
                     StorageUtil.setColor(1);
                 }
-                updateWidget();
+                updateWidget(this);
                 this.finish();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void updateWidget() {
-        DBDao dao = new DBDao(this);
+    public static void updateWidget(Context context) {
+        DBDao dao = new DBDao(context);
         List<Memory> list = dao.findAll();
         for (int i = 0; i < list.size(); i++) {
-            int appWidgetId = ConfigActivity.getAwID(this, list.get(i).getId());
+            int appWidgetId = ConfigActivity.getAwID(context, list.get(i).getId());
             if (appWidgetId > 0) {
-                AppWidgetManager awm = AppWidgetManager.getInstance(this);
-                MyAppWidgetProvider.sendMsg(this, awm, appWidgetId, list.get(i).getId());
+                AppWidgetManager awm = AppWidgetManager.getInstance(context);
+                MyAppWidgetProvider.sendMsg(context, awm, appWidgetId, list.get(i).getId());
             }
 
         }

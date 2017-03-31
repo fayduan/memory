@@ -46,6 +46,9 @@ android {
                 renameAPK(variant, defaultConfig)
             }
         }
+        debug {
+            applicationIdSuffix '.debug'
+        }
     }
     buildTypes.each {
         it.buildConfigField 'String', 'FIR_TOKEN', project.hasProperty("FIR_TOKEN_STR") ? FIR_TOKEN_STR : System.getenv("FIR_TOKEN_STR")
