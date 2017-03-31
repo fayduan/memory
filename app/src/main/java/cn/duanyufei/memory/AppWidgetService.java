@@ -14,8 +14,8 @@ public class AppWidgetService extends Service {
 
     final static String TAG = "AppWidgetService";
 
-    private static final int ALARM_DURATION = 4000;// * 60 * 60 * 1000; // service 自启间隔
-    private static final int UPDATE_DURATION = 4000;// * 60 * 60 * 1000;     // Widget 更新间隔 4h
+    private static final int ALARM_DURATION = 4 * 60 * 60 * 1000; // service 自启间隔 4h
+    private static final int UPDATE_DURATION = 4 * 60 * 60 * 1000;     // Widget 更新间隔 4h
     private static final int UPDATE_MESSAGE = 1000;
 
     private UpdateHandler updateHandler; // 更新 Widget 的 Handler
