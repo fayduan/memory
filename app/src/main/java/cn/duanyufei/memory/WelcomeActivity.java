@@ -18,9 +18,6 @@ public class WelcomeActivity extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_welcome);
 
-        Intent intent = new Intent(this, AppWidgetService.class);
-        startService(intent);
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
