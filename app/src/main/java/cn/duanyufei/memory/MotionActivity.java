@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -25,7 +26,7 @@ import cn.duanyufei.model.Motion;
 import cn.duanyufei.util.UpdateTask;
 
 public class MotionActivity extends AppCompatActivity {
-    
+
     final static String TAG = "MotionActivity";
 
     private static final int DEL_TAG = 0;
@@ -62,14 +63,12 @@ public class MotionActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent addIntent = new Intent();
-//                addIntent.setClass(MainActivity.this, AddActivity.class);
-//                MainActivity.this.startActivity(addIntent);
+                MotionActivity.this.startActivity(new Intent(MotionActivity.this, AddMotionActivity.class));
             }
         });
 
         dao = DBDao.getInstance();
-//        ml = dao.f();
+        ml = dao.findAllMotion();
         adapter = new MyAdapter();
         lv.setAdapter(adapter);
 
@@ -85,7 +84,7 @@ public class MotionActivity extends AppCompatActivity {
             @Override
             public void handleMessage(Message msg) {
                 if (msg.what == DEL_TAG) {
-//                    ml = dao.findAllMemory();
+                    ml = dao.findAllMotion();
                     adapter.notifyDataSetChanged();
                 }
             }
@@ -106,6 +105,9 @@ public class MotionActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
+            if (ml == null) {
+                return 0;
+            }
             return ml.size();
         }
 
@@ -121,16 +123,17 @@ public class MotionActivity extends AppCompatActivity {
 
         @Override
         public View getView(int arg0, View arg1, ViewGroup arg2) {
-//            Memory memory = ml.get(arg0);
-            View view = View.inflate(MotionActivity.this, R.layout.list_memory, null);
-//            TextView tv_text = (TextView) view.findViewById(R.id.tv_item_text);
-//            tv_text.setText(memory.getText());
-//            TextView tv_number = (TextView) view.findViewById(R.id.tv_item_number);
-//            tv_number.setText(memory.getNumber() + "");
-//            if (memory.getType() == 0) {
-//                tv_number.setTextColor(getResources().getColor(R.color.red));
-//            }
-//            Log.i(TAG, "getView: " + memory.getText());
+            Motion motion = ml.get(arg0);
+            View view = View.inflate(MotionActivity.this, R.layout.list_motion, null);
+            TextView txtMotion = (TextView) view.findViewById(R.id.txt_motion);
+            TextView txtGroup = (TextView) view.findViewById(R.id.txt_group);
+            TextView txtNumber = (TextView) view.findViewById(R.id.txt_number);
+            TextView txtCurWeight = (TextView) view.findViewById(R.id.txt_cur_weight);
+            txtMotion.setText(motion.getText());
+            txtGroup.setText(motion.getGroups() + "");
+            txtNumber.setText(motion.getNumber() + "");
+            txtCurWeight.setText(motion.getCurWeight() + "");
+
             return view;
         }
 
@@ -142,9 +145,9 @@ public class MotionActivity extends AppCompatActivity {
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
             Intent changeIntent = new Intent();
-//            changeIntent.setClass(MainActivity.this, AddActivity.class);
-//            changeIntent.putExtra("id", ml.get(position).getId());
-//            MainActivity.this.startActivity(changeIntent);
+            changeIntent.setClass(MotionActivity.this, AddMotionActivity.class);
+            changeIntent.putExtra("id", ml.get(position).getId());
+            MotionActivity.this.startActivity(changeIntent);
         }
     };
     AdapterView.OnItemLongClickListener itemLongListener = new AdapterView.OnItemLongClickListener() {
@@ -152,9 +155,8 @@ public class MotionActivity extends AppCompatActivity {
         @Override
         public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                                        int arg2, long arg3) {
-            // TODO Auto-generated method stub
-//            Memory m = ml.get(arg2);
-//            delid = m.getId();
+            Motion m = ml.get(arg2);
+            delid = m.getId();
             new AlertDialog.Builder(MotionActivity.this)
                     .setTitle("某人要弹出来的")
                     .setMessage("是手抖不？")
@@ -167,7 +169,6 @@ public class MotionActivity extends AppCompatActivity {
     };
 
     public DialogInterface.OnClickListener del_cancel = new DialogInterface.OnClickListener() {
-
 
         @Override
         public void onClick(DialogInterface arg0, int arg1) {

@@ -7,6 +7,8 @@ import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.idescout.sql.SqlScoutServer;
+
 public class WelcomeActivity extends Activity {
 
     @Override
@@ -26,6 +28,8 @@ public class WelcomeActivity extends Activity {
                 WelcomeActivity.this.finish();
             }
         }, 700);
+
+        SqlScoutServer.create(this, getPackageName());
     }
 
 }

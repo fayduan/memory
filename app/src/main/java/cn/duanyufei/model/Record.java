@@ -14,6 +14,11 @@ public class Record {
     Date date;
     int weight;
 
+    public Record(long motionId, Date date, int weight) {
+        this.motionId = motionId;
+        this.date = date;
+        this.weight = weight;
+    }
 
     @Generated(hash = 477726293)
     public Record() {

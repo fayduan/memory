@@ -20,7 +20,10 @@ import cn.duanyufei.model.Motion;
 import cn.duanyufei.model.Record;
 
 public class DBDao {
-    private final static String dbName = "iseeyou.db";
+
+    final static String TAG = "DBDao";
+
+    private final static String dbName = "memory.db";
     private static DBDao mInstance;
     private DaoMaster.DevOpenHelper openHelper;
     private Context context;
@@ -100,25 +103,34 @@ public class DBDao {
         return memories;
     }
 
-    public void addMotion(Motion motion) {
+    public long addMotion(Motion motion) {
         DaoMaster daoMaster = new DaoMaster(getWritableDatabase());
         DaoSession daoSession = daoMaster.newSession();
         MotionDao dao = daoSession.getMotionDao();
-        dao.insert(motion);
+        long id = dao.insert(motion);
+        addRecord(new Record(id, new Date(), motion.getCurWeight()));
+        return id;
     }
 
-    public void addRecord(Record record) {
+    public long addRecord(Record record) {
         DaoMaster daoMaster = new DaoMaster(getWritableDatabase());
         DaoSession daoSession = daoMaster.newSession();
         RecordDao dao = daoSession.getRecordDao();
-        dao.insert(record);
+        return dao.insert(record);
     }
 
-    public void updateMotion(Motion motion) {
+    public void updateMotion(long id, Motion motion) {
+        Motion oldMotion = findMotion(id);
+        oldMotion.setGroups(motion.getGroups());
+        oldMotion.setNumber(motion.getNumber());
+        oldMotion.setText(motion.getText());
+        if (oldMotion.getCurWeight() != motion.getCurWeight()) {
+            addRecord(new Record(oldMotion.getId(), new Date(), motion.getCurWeight()));
+        }
         DaoMaster daoMaster = new DaoMaster(getWritableDatabase());
         DaoSession daoSession = daoMaster.newSession();
         MotionDao dao = daoSession.getMotionDao();
-        dao.update(motion);
+        dao.update(oldMotion);
     }
 
     public void updateRecord(Record record) {
@@ -138,7 +150,27 @@ public class DBDao {
         if (motions == null || motions.size() == 0) {
             return null;
         } else {
-            return motions.get(0);
+            Motion motion = motions.get(0);
+            Record record = findNewestRecord(motion.getId());
+            if (record != null) {
+                motion.setCurWeight(record.getWeight());
+            }
+            return motion;
+        }
+    }
+
+    public Record findNewestRecord(long id) {
+        DaoMaster daoMaster = new DaoMaster(getReadableDatabase());
+        DaoSession daoSession = daoMaster.newSession();
+        RecordDao recordDao = daoSession.getRecordDao();
+        QueryBuilder<Record> recordQueryBuilder = recordDao.queryBuilder();
+        recordQueryBuilder.where(RecordDao.Properties.MotionId.eq(id));
+        recordQueryBuilder.orderDesc(RecordDao.Properties.Date);
+        List<Record> records = recordQueryBuilder.list();
+        if (records == null || records.size() == 0) {
+            return null;
+        } else {
+            return records.get(0);
         }
     }
 
@@ -175,10 +207,10 @@ public class DBDao {
         RecordDao recordDao = daoSession.getRecordDao();
         for (int i = 0; i < motions.size(); i++) {
             QueryBuilder<Record> recordQueryBuilder = recordDao.queryBuilder();
-            recordQueryBuilder.where(RecordDao.Properties.MotionId.eq(motions.get(i)));
+            recordQueryBuilder.where(RecordDao.Properties.MotionId.eq(motions.get(i).getId()));
             recordQueryBuilder.orderDesc(RecordDao.Properties.Date);
             List<Record> records = recordQueryBuilder.list();
-            if (records == null || records.size() == 0) {
+            if (records != null && records.size() != 0) {
                 motions.get(i).setCurWeight(records.get(0).getWeight());
             }
         }

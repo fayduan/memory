@@ -10,21 +10,34 @@ public class Motion {
     @Id(autoincrement = true)
     Long id;
     String text;
-    int group;
+    int groups;
     int number;
     @Transient
     int curWeight;
 
-    @Generated(hash = 408308330)
-    public Motion(Long id, String text, int group, int number) {
-        this.id = id;
+    public Motion(String text, int groups, int number) {
         this.text = text;
-        this.group = group;
+        this.groups = groups;
         this.number = number;
+    }
+
+    public Motion(String text, int groups, int number, int curWeight) {
+        this.text = text;
+        this.groups = groups;
+        this.number = number;
+        this.curWeight = curWeight;
     }
 
     @Generated(hash = 499522415)
     public Motion() {
+    }
+
+    @Generated(hash = 1970223015)
+    public Motion(Long id, String text, int groups, int number) {
+        this.id = id;
+        this.text = text;
+        this.groups = groups;
+        this.number = number;
     }
 
     public Long getId() {
@@ -43,12 +56,12 @@ public class Motion {
         this.text = text;
     }
 
-    public int getGroup() {
-        return this.group;
+    public int getGroups() {
+        return this.groups;
     }
 
-    public void setGroup(int group) {
-        this.group = group;
+    public void setGroups(int groups) {
+        this.groups = groups;
     }
 
     public int getNumber() {
@@ -65,5 +78,16 @@ public class Motion {
 
     public void setCurWeight(int curWeight) {
         this.curWeight = curWeight;
+    }
+
+    @Override
+    public String toString() {
+        return "Motion{" +
+                "id=" + id +
+                ", text='" + text + '\'' +
+                ", groups=" + groups +
+                ", number=" + number +
+                ", curWeight=" + curWeight +
+                '}';
     }
 }

@@ -27,7 +27,7 @@
     <string name="button_later">以后再说</string>
 
     <string name="add">添加</string>
-    <string name="empty">没有填纪念什么哦~</string>
+    <string name="empty">有什么东西没填~</string>
     <string name="select">选择一个纪念日</string>
 
     <string name="app_widget_color">桌面插件文字颜色</string>
@@ -36,5 +36,9 @@
 
     <string name="record">记录</string>
     <string name="motion">动作</string>
+    <string name="group">组数</string>
+    <string name="number_of_group">每组数量</string>
+    <string name="current_weight">当前重量</string>
+    <string name="add_motion">添加动作</string>
 
 </resources>

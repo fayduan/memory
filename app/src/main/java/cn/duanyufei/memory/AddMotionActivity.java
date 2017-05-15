@@ -1,0 +1,93 @@
+package cn.duanyufei.memory;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.EditText;
+
+import cn.duanyufei.db.DBDao;
+import cn.duanyufei.model.Motion;
+import cn.duanyufei.util.ToastUtil;
+
+public class AddMotionActivity extends AppCompatActivity {
+
+    private EditText txtMotion;
+    private EditText txtGroup;
+    private EditText txtNumber;
+    private EditText txtCurWeight;
+
+    private DBDao dao;
+    private long id;
+    private Context context;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        context = this;
+        dao = DBDao.getInstance();
+        Intent get = getIntent();
+        id = get.getLongExtra("id", -1L);
+
+        setContentView(R.layout.activity_add_motion);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddMotionActivity.this.finish();
+            }
+        });
+
+        txtMotion = (EditText) findViewById(R.id.txt_motion);
+        txtGroup = (EditText) findViewById(R.id.txt_group);
+        txtNumber = (EditText) findViewById(R.id.txt_number);
+        txtCurWeight = (EditText) findViewById(R.id.txt_cur_weight);
+
+        if (id != -1) {
+            Motion m = dao.findMotion(id);
+            txtMotion.setText(m.getText());
+            txtGroup.setText(m.getGroups() + "");
+            txtNumber.setText(m.getNumber() + "");
+            txtCurWeight.setText(m.getCurWeight() + "");
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.done, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_done:
+                String motion = txtMotion.getText().toString();
+                String group = txtGroup.getText().toString();
+                String number = txtNumber.getText().toString();
+                String curWeight = txtCurWeight.getText().toString();
+                if (motion.isEmpty() || group.isEmpty() || number.isEmpty() || curWeight.isEmpty()) {
+                    ToastUtil.show(getApplicationContext(), R.string.empty, ToastUtil.SHORT);
+                } else {
+                    Motion newMotion = new Motion(motion, Integer.parseInt(group), Integer.parseInt(number), Integer.parseInt(curWeight));
+                    if (id != -1) {
+                        dao.updateMotion(id, newMotion);
+                    } else {
+                        dao.addMotion(newMotion);
+                    }
+                    this.finish();
+                }
+                break;
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+}

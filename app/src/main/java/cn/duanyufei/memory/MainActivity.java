@@ -157,6 +157,9 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
+            if (ml == null) {
+                return 0;
+            }
             return ml.size();
         }
 

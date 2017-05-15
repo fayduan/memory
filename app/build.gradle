@@ -55,7 +55,7 @@ android {
         it.buildConfigField 'String', 'FIR_TOKEN', project.hasProperty("FIR_TOKEN_STR") ? FIR_TOKEN_STR : System.getenv("FIR_TOKEN_STR")
     }
     greendao {
-        schemaVersion 1
+        schemaVersion 2
         targetGenDir 'src/main/java'
         daoPackage 'cn.duanyufei.greendao'
     }
@@ -78,4 +78,5 @@ dependencies {
     compile 'com.android.support:design:25.3.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'org.greenrobot:greendao:3.2.2'
+    compile 'com.idescout.sql:sqlscout-server:2.0'
 }
