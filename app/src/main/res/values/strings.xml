@@ -14,7 +14,7 @@
     <string name="btn_cancel">取消</string>
     <string name="msg_name">纪念什么</string>
     <string name="msg_date">纪念哪天</string>
-    <string name="msg_nolist">快添加一条纪念日吧~</string>
+    <string name="msg_nolist">空旷的列表~</string>
 
     <string name="refresh">刷新完成</string>
     <string name="menu_update">检查更新</string>
@@ -33,4 +33,8 @@
     <string name="app_widget_color">桌面插件文字颜色</string>
     <string name="white">白色</string>
     <string name="black">黑色</string>
+
+    <string name="record">记录</string>
+    <string name="motion">动作</string>
+
 </resources>

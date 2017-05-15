@@ -54,7 +54,7 @@ public class ConfigActivity extends AppCompatActivity {
         }
 
         dao = DBDao.getInstance();
-        ml = dao.findAll();
+        ml = dao.findAllMemory();
         lv.setAdapter(new MyAdapter());
     }
 
@@ -78,7 +78,7 @@ public class ConfigActivity extends AppCompatActivity {
         @Override
         public View getView(int arg0, View arg1, ViewGroup arg2) {
             Memory memory = ml.get(arg0);
-            View view = View.inflate(ConfigActivity.this, R.layout.list_item, null);
+            View view = View.inflate(ConfigActivity.this, R.layout.list_memory, null);
             TextView tv_text = (TextView) view.findViewById(R.id.tv_item_text);
             tv_text.setText(memory.getText());
             TextView tv_number = (TextView) view.findViewById(R.id.tv_item_number);

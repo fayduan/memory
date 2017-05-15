@@ -87,14 +87,14 @@ public class MyAppWidgetProvider extends AppWidgetProvider {
 
     public static void updateView(Context context,
                                   AppWidgetManager appWidgetManager, Message msg) {
-//        Log.i("minor", "update,appWidgetID=" + msg.arg1 + ",MID=" + msg.arg2);
+//        Log.i("minor", "updateMemory,appWidgetID=" + msg.arg1 + ",MID=" + msg.arg2);
         try {
             DBDao dao = DBDao.getInstance();
             RemoteViews views = null;
             //
             int mAppWidgetID = msg.arg1;
             int mID = msg.arg2;
-            Memory m = dao.find(mID);
+            Memory m = dao.findMemory(mID);
             views = new RemoteViews(context.getPackageName(),
                     R.layout.widget_view_light);
             Intent launchIntent = new Intent(context, MainActivity.class);

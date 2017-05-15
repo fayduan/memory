@@ -68,7 +68,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     public static void updateWidget(Context context) {
         DBDao dao = DBDao.getInstance();
-        List<Memory> list = dao.findAll();
+        List<Memory> list = dao.findAllMemory();
         for (int i = 0; i < list.size(); i++) {
             int appWidgetId = ConfigActivity.getAwID(context, list.get(i).getId());
             if (appWidgetId > 0) {

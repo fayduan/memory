@@ -53,7 +53,7 @@ public class AddActivity extends AppCompatActivity {
         dp = (DatePicker) findViewById(R.id.add_dp);
         calendar = Calendar.getInstance();
         if (id != -1) {
-            Memory m = dao.find(id);
+            Memory m = dao.findMemory(id);
             calendar.setTime(m.getDate());
             mname.setText(m.getText());
             //Toast.makeText(getApplicationContext(),calendar.toString(), Toast.LENGTH_SHORT).show();
@@ -88,13 +88,13 @@ public class AddActivity extends AppCompatActivity {
                 if (!text.isEmpty()) {
                     if (id != -1) {
                         //Toast.makeText(getApplicationContext(), id+text+calendar.toString(), Toast.LENGTH_SHORT).show();
-                        dao.update(id, text, calendar.getTime());
+                        dao.updateMemory(id, text, calendar.getTime());
                         int appWidgetId = ConfigActivity.getAwID(context, id);
                         AppWidgetManager awm = AppWidgetManager.getInstance(context);
                         MyAppWidgetProvider.sendMsg(context, awm, appWidgetId, id);
                         Log.i("minor", "1sendmsg,appWidgetID=" + appWidgetId + ",MID=" + id);
                     } else {
-                        dao.add(text, calendar.getTime());
+                        dao.addMemory(text, calendar.getTime());
                     }
                     this.finish();
                 } else {
