@@ -40,5 +40,8 @@
     <string name="number_of_group">每组数量</string>
     <string name="current_weight">当前重量</string>
     <string name="add_motion">添加动作</string>
+    <string name="add_record">添加重量</string>
+    <string name="weight">重量(Kg)</string>
+    <string name="date">日期</string>
 
 </resources>

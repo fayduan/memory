@@ -56,8 +56,11 @@
 
         <activity android:name=".MotionActivity">
         </activity>
-
         <activity android:name=".AddMotionActivity"/>
+        <activity android:name=".RecordActivity">
+        </activity>
+        <activity android:name=".AddRecordActivity">
+        </activity>
     </application>
 
 </manifest>

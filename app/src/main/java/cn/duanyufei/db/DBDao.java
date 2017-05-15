@@ -194,6 +194,7 @@ public class DBDao {
         RecordDao dao = daoSession.getRecordDao();
         QueryBuilder<Record> qb = dao.queryBuilder();
         qb.where(RecordDao.Properties.MotionId.eq(id));
+        qb.orderDesc(RecordDao.Properties.Date);
         List<Record> records = qb.list();
         return records;
     }
@@ -221,6 +222,11 @@ public class DBDao {
         DaoMaster daoMaster = new DaoMaster(getWritableDatabase());
         DaoSession daoSession = daoMaster.newSession();
         MotionDao dao = daoSession.getMotionDao();
+        RecordDao recordDao = daoSession.getRecordDao();
+        List<Record> records = findRecordByMotion(id);
+        for (int i = 0; i < records.size(); i++) {
+            recordDao.delete(records.get(i));
+        }
         dao.deleteByKey(id);
     }
 

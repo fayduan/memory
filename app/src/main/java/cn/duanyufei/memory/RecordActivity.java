@@ -7,14 +7,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,41 +21,43 @@ import java.util.List;
 
 import cn.duanyufei.db.DBDao;
 import cn.duanyufei.model.Motion;
-import cn.duanyufei.util.UpdateTask;
+import cn.duanyufei.model.Record;
+import cn.duanyufei.util.DateUtil;
 
-public class MotionActivity extends AppCompatActivity {
+public class RecordActivity extends AppCompatActivity {
 
-    final static String TAG = "MotionActivity";
+    final static String TAG = "RecordActivity";
 
     private static final int DEL_TAG = 0;
 
-    private List<Motion> ml;
+    private List<Record> ml;
     private DBDao dao;
     private ListView lv;
     private long delid;
     private MyAdapter adapter;
     private FloatingActionButton fab;
-    private Snackbar snackBar;
     private Handler handler;
+
+    Motion motion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         delid = 0;
-        setContentView(R.layout.activity_motion);
-
-        new UpdateTask(this).update();
-
-        Intent intent = new Intent(this, AppWidgetService.class);
-        startService(intent);
-        SettingsActivity.updateWidget(this);
+        setContentView(R.layout.activity_record);
+        Intent get = getIntent();
+        motion = (Motion) get.getSerializableExtra("motion");
+        if (motion == null) {
+            finish();
+        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(motion.getText() + " " + motion.getGroups() + "×" + motion.getNumber());
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MotionActivity.this.finish();
+                RecordActivity.this.finish();
             }
         });
 
@@ -69,28 +69,23 @@ public class MotionActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MotionActivity.this.startActivity(new Intent(MotionActivity.this, AddMotionActivity.class));
+                Intent intent = new Intent(RecordActivity.this, AddRecordActivity.class);
+                intent.putExtra("motionId", motion.getId());
+                RecordActivity.this.startActivity(intent);
             }
         });
 
         dao = DBDao.getInstance();
-        ml = dao.findAllMotion();
+        ml = dao.findRecordByMotion(motion.getId());
         adapter = new MyAdapter();
         lv.setAdapter(adapter);
-
-        snackBar = Snackbar.make(fab, R.string.msg_nolist, Snackbar.LENGTH_INDEFINITE).setAction(R.string.button_ok, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                snackBar.dismiss();
-            }
-        });
 
         handler = new Handler() {
 
             @Override
             public void handleMessage(Message msg) {
                 if (msg.what == DEL_TAG) {
-                    ml = dao.findAllMotion();
+                    ml = dao.findRecordByMotion(motion.getId());
                     adapter.notifyDataSetChanged();
                 }
             }
@@ -100,10 +95,7 @@ public class MotionActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        ml = dao.findAllMotion();
-        if (ml.size() == 0) {
-            snackBar.show();
-        }
+        ml = dao.findRecordByMotion(motion.getId());
         adapter.notifyDataSetChanged();
     }
 
@@ -129,27 +121,12 @@ public class MotionActivity extends AppCompatActivity {
 
         @Override
         public View getView(int arg0, View arg1, ViewGroup arg2) {
-            final Motion motion = ml.get(arg0);
-            View view = View.inflate(MotionActivity.this, R.layout.list_motion, null);
-            TextView txtMotion = (TextView) view.findViewById(R.id.txt_motion);
-            TextView txtGroup = (TextView) view.findViewById(R.id.txt_group);
-            TextView txtNumber = (TextView) view.findViewById(R.id.txt_number);
-            TextView txtCurWeight = (TextView) view.findViewById(R.id.txt_cur_weight);
-            LinearLayout llWeight = (LinearLayout) view.findViewById(R.id.ll_weight);
-            txtMotion.setText(motion.getText());
-            txtGroup.setText(motion.getGroups() + "");
-            txtNumber.setText(motion.getNumber() + "");
-            txtCurWeight.setText(motion.getCurWeight() + "");
-            llWeight.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(MotionActivity.this, RecordActivity.class);
-                    intent.putExtra("motion", motion);
-                    startActivity(intent);
-                }
-            });
-            view.setTag(motion.getId());
-
+            final Record record = ml.get(arg0);
+            View view = View.inflate(RecordActivity.this, R.layout.list_record, null);
+            TextView txtDate = (TextView) view.findViewById(R.id.txt_date);
+            TextView txtWeight = (TextView) view.findViewById(R.id.txt_weight);
+            txtDate.setText(DateUtil.toShortDateString(record.getDate()));
+            txtWeight.setText(record.getWeight() + "");
             return view;
         }
 
@@ -161,9 +138,9 @@ public class MotionActivity extends AppCompatActivity {
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
             Intent changeIntent = new Intent();
-            changeIntent.setClass(MotionActivity.this, AddMotionActivity.class);
-            changeIntent.putExtra("id", ml.get(position).getId());
-            MotionActivity.this.startActivity(changeIntent);
+            changeIntent.setClass(RecordActivity.this, AddRecordActivity.class);
+            changeIntent.putExtra("record", ml.get(position));
+            RecordActivity.this.startActivity(changeIntent);
         }
     };
     AdapterView.OnItemLongClickListener itemLongListener = new AdapterView.OnItemLongClickListener() {
@@ -171,9 +148,9 @@ public class MotionActivity extends AppCompatActivity {
         @Override
         public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                                        int arg2, long arg3) {
-            Motion m = ml.get(arg2);
+            Record m = ml.get(arg2);
             delid = m.getId();
-            new AlertDialog.Builder(MotionActivity.this)
+            new AlertDialog.Builder(RecordActivity.this)
                     .setTitle("某人要弹出来的")
                     .setMessage("是手抖不？")
                     .setPositiveButton("嗯嗯是的", del_cancel)
@@ -195,8 +172,12 @@ public class MotionActivity extends AppCompatActivity {
 
         @Override
         public void onClick(DialogInterface arg0, int arg1) {
-            Toast.makeText(getApplicationContext(), "已删除", Toast.LENGTH_SHORT).show();
-            delete(delid);
+            if (ml.size() == 1) {
+                Toast.makeText(getApplicationContext(), "最少留一个吧", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "已删除", Toast.LENGTH_SHORT).show();
+                delete(delid);
+            }
         }
     };
 
@@ -205,7 +186,7 @@ public class MotionActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                dao.deleteMotion(delId);
+                dao.deleteRecord(delId);
                 Message msg = Message.obtain();
                 msg.obj = null;
                 msg.what = DEL_TAG;

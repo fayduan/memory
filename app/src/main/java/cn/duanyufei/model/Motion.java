@@ -5,8 +5,13 @@ import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Transient;
 
+import java.io.Serializable;
+
 @Entity
-public class Motion {
+public class Motion implements Serializable{
+
+    static final long serialVersionUID = 1L;
+
     @Id(autoincrement = true)
     Long id;
     String text;
