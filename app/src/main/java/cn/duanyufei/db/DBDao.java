@@ -1,108 +1,118 @@
 package cn.duanyufei.db;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.util.ArrayList;
+import org.greenrobot.greendao.query.QueryBuilder;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import cn.duanyufei.app.MApplication;
+import cn.duanyufei.greendao.DaoMaster;
+import cn.duanyufei.greendao.DaoSession;
+import cn.duanyufei.greendao.MemoryDao;
 import cn.duanyufei.model.Memory;
 
 public class DBDao {
-    private DBSQLiteOpenHelper helper;
+    private final static String dbName = "iseeyou.db";
+    private static DBDao mInstance;
+    private DaoMaster.DevOpenHelper openHelper;
+    private Context context;
     private Calendar cal;
 
-    public DBDao(Context context) {
-        helper = new DBSQLiteOpenHelper(context);
+    private DBDao(Context context) {
+        this.context = context;
+        openHelper = new DaoMaster.DevOpenHelper(context, dbName, null);
         cal = Calendar.getInstance();
     }
 
+    /**
+     * 获取单例引用
+     *
+     * @return 实例
+     */
+
+    public static DBDao getInstance() {
+        if (mInstance == null) {
+            synchronized (DBDao.class) {
+                if (mInstance == null) {
+                    mInstance = new DBDao(MApplication.getContext());
+                }
+            }
+        }
+        return mInstance;
+    }
+
     public void add(String text, Date date) {
-        SQLiteDatabase db = helper.getWritableDatabase();
-        db.execSQL("insert into memory (text,mdate) values(?,?)",
-                new Object[]{text, date.getTime()});
-        //System.out.println("After:"+df.format(date));
-        db.close();
+        DaoMaster daoMaster = new DaoMaster(getWritableDatabase());
+        DaoSession daoSession = daoMaster.newSession();
+        MemoryDao dao = daoSession.getMemoryDao();
+        Memory memory = new Memory(text, date);
+        dao.insert(memory);
     }
 
-    public Memory find(int id) {
-        SQLiteDatabase db = helper.getWritableDatabase();
-        Cursor cursor = db.rawQuery("select * from memory where id=?", new String[]{id + ""});
-        boolean result = cursor.moveToNext();
-        //int id = cursor.getInt(cursor.getColumnIndex("id"));
-        String text = cursor.getString(cursor.getColumnIndex("text"));
-        long mdate = cursor.getLong(cursor.getColumnIndex("mdate"));
-        cal.setTimeInMillis(mdate);
-        Memory m = new Memory(id, text, cal.getTime());
-        cursor.close();
-        db.close();
-        return m;
+    public Memory find(long id) {
+        DaoMaster daoMaster = new DaoMaster(getReadableDatabase());
+        DaoSession daoSession = daoMaster.newSession();
+        MemoryDao dao = daoSession.getMemoryDao();
+        QueryBuilder<Memory> qb = dao.queryBuilder();
+        qb.where(MemoryDao.Properties.Id.eq(id));
+        List<Memory> memories = qb.list();
+        if (memories == null || memories.size() == 0) {
+            return null;
+        } else {
+            Memory memory = memories.get(0);
+            memory.update();
+            return memory;
+        }
     }
 
-    public void update(int id, String text, Date date) {
-        SQLiteDatabase db = helper.getWritableDatabase();
-        db.execSQL("update memory set text=?,mdate=? where id=? ", new Object[]{text, date.getTime(), id});
-        db.close();
+    public void update(long id, String text, Date date) {
+        DaoMaster daoMaster = new DaoMaster(getWritableDatabase());
+        DaoSession daoSession = daoMaster.newSession();
+        Memory memory = new Memory(id, text, date);
+        MemoryDao dao = daoSession.getMemoryDao();
+        dao.update(memory);
     }
 
-    public void delete(int id) {
-        SQLiteDatabase db = helper.getWritableDatabase();
-        db.execSQL("delete from memory where id=? ", new Object[]{id});
-        db.close();
+    public void delete(long id) {
+        DaoMaster daoMaster = new DaoMaster(getWritableDatabase());
+        DaoSession daoSession = daoMaster.newSession();
+        MemoryDao dao = daoSession.getMemoryDao();
+        dao.deleteByKey(id);
     }
 
     synchronized public List<Memory> findAll() {
-        SQLiteDatabase db = helper.getWritableDatabase();
-        Cursor cursor = db.rawQuery("select * from memory order by mdate desc", null);
-        List<Memory> list = new ArrayList<>();
-        if (cursor.getCount() == 0) return list;
-        while (cursor.moveToNext()) {
-            int id = cursor.getInt(cursor.getColumnIndex("id"));
-            String text = cursor.getString(cursor.getColumnIndex("text"));
-            long mdate = cursor.getLong(cursor.getColumnIndex("mdate"));
-            cal.setTimeInMillis(mdate);
-            Memory m = new Memory(id, text, cal.getTime());
-            list.add(m);
+        DaoMaster daoMaster = new DaoMaster(getReadableDatabase());
+        DaoSession daoSession = daoMaster.newSession();
+        MemoryDao dao = daoSession.getMemoryDao();
+        QueryBuilder<Memory> qb = dao.queryBuilder();
+        List<Memory> memories = qb.list();
+        for (int i = 0; i < memories.size(); i++) {
+            memories.get(i).update();
         }
-        cursor.close();
-        db.close();
-        return list;
+        return memories;
     }
 
-    public List<Memory> findAllBefore() {
-        SQLiteDatabase db = helper.getWritableDatabase();
-        Cursor cursor = db.rawQuery("select * from memory where mdate<=strftime('%Y-%m-%d') order by mdate desc", null);
-        List<Memory> list = new ArrayList<Memory>();
-        while (cursor.moveToNext()) {
-            int id = cursor.getInt(cursor.getColumnIndex("id"));
-            String text = cursor.getString(cursor.getColumnIndex("text"));
-            long mdate = cursor.getLong(cursor.getColumnIndex("mdate"));
-            cal.setTimeInMillis(mdate);
-            Memory m = new Memory(id, text, cal.getTime());
-            list.add(m);
+    /**
+     * 获取可读数据库
+     */
+    private SQLiteDatabase getReadableDatabase() {
+        if (openHelper == null) {
+            openHelper = new DaoMaster.DevOpenHelper(context, dbName, null);
         }
-        cursor.close();
-        db.close();
-        return list;
+        return openHelper.getReadableDatabase();
     }
 
-    public List<Memory> findAllAfter() {
-        SQLiteDatabase db = helper.getWritableDatabase();
-        Cursor cursor = db.rawQuery("select * from memory where mdate>strftime('%Y-%m-%d') order by mdate", null);
-        List<Memory> list = new ArrayList<Memory>();
-        while (cursor.moveToNext()) {
-            int id = cursor.getInt(cursor.getColumnIndex("id"));
-            String text = cursor.getString(cursor.getColumnIndex("text"));
-            long mdate = cursor.getLong(cursor.getColumnIndex("mdate"));
-            cal.setTimeInMillis(mdate);
-            Memory m = new Memory(id, text, cal.getTime());
-            list.add(m);
+    /**
+     * 获取可写数据库
+     */
+    private SQLiteDatabase getWritableDatabase() {
+        if (openHelper == null) {
+            openHelper = new DaoMaster.DevOpenHelper(context, dbName, null);
         }
-        cursor.close();
-        db.close();
-        return list;
+        return openHelper.getWritableDatabase();
     }
 }

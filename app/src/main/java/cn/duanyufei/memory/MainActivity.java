@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     //private List<Integer> selected;
     private DBDao dao;
     private ListView lv;
-    private int delid;
+    private long delid;
     private MyAdapter adapter;
     private FloatingActionButton fab;
     private Snackbar snackBar;
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        dao = new DBDao(MainActivity.this);
+        dao = DBDao.getInstance();
         ml = dao.findAll();
         adapter = new MyAdapter();
         lv.setAdapter(adapter);
@@ -231,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    private void delete(final int delId) {
+    private void delete(final long delId) {
 
         new Thread(new Runnable() {
             @Override

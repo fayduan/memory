@@ -27,16 +27,16 @@ public class AddActivity extends AppCompatActivity {
     private DatePicker dp;
     private DBDao dao;
     private Calendar calendar;
-    private int id;
+    private long id;
     private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = this;
-        dao = new DBDao(AddActivity.this);
+        dao = DBDao.getInstance();
         Intent get = getIntent();
-        id = get.getIntExtra("id", -1);
+        id = get.getLongExtra("id", -1L);
 
         setContentView(R.layout.activity_add);
 

@@ -53,7 +53,7 @@ public class ConfigActivity extends AppCompatActivity {
                     AppWidgetManager.INVALID_APPWIDGET_ID);
         }
 
-        dao = new DBDao(ConfigActivity.this);
+        dao = DBDao.getInstance();
         ml = dao.findAll();
         lv.setAdapter(new MyAdapter());
     }
@@ -97,7 +97,7 @@ public class ConfigActivity extends AppCompatActivity {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
-            int mID = ml.get(position).getId();
+            long mID = ml.get(position).getId();
             saveID(context, mAppWidgetId, mID);
             AppWidgetManager awm = AppWidgetManager.getInstance(context);
             Intent resultIntent = new Intent();
@@ -111,10 +111,10 @@ public class ConfigActivity extends AppCompatActivity {
         }
     };
 
-    public static void saveID(Context context, int appWidgetId, int mID) {
+    public static void saveID(Context context, int appWidgetId, long mID) {
         SharedPreferences sp = context.getSharedPreferences("mid", Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
-        editor.putInt("awmid_" + appWidgetId, mID);
+        editor.putLong("awmid_" + appWidgetId, mID);
         editor.commit();
 
         SharedPreferences sp1 = context.getSharedPreferences("awmid", Activity.MODE_PRIVATE);
@@ -128,7 +128,7 @@ public class ConfigActivity extends AppCompatActivity {
         return sp.getInt("awmid_" + appWidgetId, -1);
     }
 
-    public static int getAwID(Context context, int mId) {
+    public static int getAwID(Context context, long mId) {
         SharedPreferences sp = context.getSharedPreferences("awmid", Activity.MODE_PRIVATE);
         return sp.getInt("mid_" + mId, -1);
     }

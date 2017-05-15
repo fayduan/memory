@@ -74,13 +74,13 @@ public class MyAppWidgetProvider extends AppWidgetProvider {
 
     public static void sendMsg(final Context context,
                                AppWidgetManager appWidgetManager, final int appWidgetId,
-                               final int mId) {
+                               final long mId) {
 
         final Handler handler = getHandler(context, appWidgetManager);
 
         Message message = new Message();
         message.arg1 = appWidgetId;
-        message.arg2 = mId;
+        message.arg2 = (int)mId;
         handler.sendMessage(message);
 //        Log.i("minor", "2sendmsg,appWidgetID=" + appWidgetId + ",MID=" + mId);
     }
@@ -89,7 +89,7 @@ public class MyAppWidgetProvider extends AppWidgetProvider {
                                   AppWidgetManager appWidgetManager, Message msg) {
 //        Log.i("minor", "update,appWidgetID=" + msg.arg1 + ",MID=" + msg.arg2);
         try {
-            DBDao dao = new DBDao(context);
+            DBDao dao = DBDao.getInstance();
             RemoteViews views = null;
             //
             int mAppWidgetID = msg.arg1;
