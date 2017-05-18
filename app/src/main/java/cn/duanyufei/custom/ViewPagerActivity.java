@@ -1,4 +1,4 @@
-package cn.duanyufei.view;
+package cn.duanyufei.custom;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;

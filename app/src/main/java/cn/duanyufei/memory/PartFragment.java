@@ -19,13 +19,15 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import cn.duanyufei.custom.ViewPagerFragment;
 import cn.duanyufei.db.DBDao;
 import cn.duanyufei.model.Motion;
 import cn.duanyufei.util.ToastUtil;
-import cn.duanyufei.view.ViewPagerFragment;
 
 
 public class PartFragment extends ViewPagerFragment {
+
+    private int pos;
 
     private static final int DEL_TAG = 0;
 

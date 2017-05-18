@@ -1,4 +1,4 @@
-package cn.duanyufei.view;
+package cn.duanyufei.custom;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
