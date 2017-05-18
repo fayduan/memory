@@ -39,8 +39,8 @@ public class DbOpenHelper extends DaoMaster.OpenHelper {
                     "\"WEIGHT\" INTEGER NOT NULL );");
         }
         if (oldVersion < 3) {
-            db.execSQL(String.format("ALTER TABLE %s ADD %s integer default 0", "MOTION", "pos"));
-            db.execSQL(String.format("ALTER TABLE %s ADD %s varchar", "MOTION", "part"));
+            db.execSQL(String.format("ALTER TABLE %s ADD %s INTEGER DEFAULT 0", "MOTION", "POS"));
+            db.execSQL(String.format("ALTER TABLE %s ADD %s TEXT", "MOTION", "PART"));
         }
 
     }
