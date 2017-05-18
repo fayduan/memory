@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	tools:context="com.duanyufei.memory.AddActivity">
+
+    <item
+        android:id="@+id/action_add"
+        android:orderInCategory="0"
+        app:showAsAction="always"
+        android:icon="@mipmap/ic_add_white_36dp"
+        android:title="@string/action_add"/>
+</menu>

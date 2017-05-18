@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this, MotionActivity.class));
                 break;
         }
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
     class MyAdapter extends BaseAdapter {

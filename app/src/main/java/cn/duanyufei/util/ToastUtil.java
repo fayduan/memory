@@ -3,6 +3,8 @@ package cn.duanyufei.util;
 import android.content.Context;
 import android.widget.Toast;
 
+import cn.duanyufei.app.MApplication;
+
 /**
  * Created by DUAN Yufei on 2017/3/6.
  */
@@ -15,6 +17,22 @@ public class ToastUtil {
 
     private ToastUtil() {
 
+    }
+
+    public static void show(int resId) {
+        if (toast == null) {
+            toast = Toast.makeText(MApplication.getContext(), "", SHORT);
+        }
+        toast.setText(resId);
+        toast.show();
+    }
+
+    public static void show(Context context, int resId) {
+        if (toast == null) {
+            toast = Toast.makeText(context, "", SHORT);
+        }
+        toast.setText(resId);
+        toast.show();
     }
 
     public static void show(Context context, int resId, int duration) {
