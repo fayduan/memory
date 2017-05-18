@@ -25,13 +25,13 @@ public class DBDao {
 
     private final static String dbName = "memory.db";
     private static DBDao mInstance;
-    private DaoMaster.DevOpenHelper openHelper;
+    private DbOpenHelper openHelper;
     private Context context;
     private Calendar cal;
 
     private DBDao(Context context) {
         this.context = context;
-        openHelper = new DaoMaster.DevOpenHelper(context, dbName, null);
+        openHelper = new DbOpenHelper(context, dbName, null);
         cal = Calendar.getInstance();
     }
 
@@ -242,7 +242,7 @@ public class DBDao {
      */
     private SQLiteDatabase getReadableDatabase() {
         if (openHelper == null) {
-            openHelper = new DaoMaster.DevOpenHelper(context, dbName, null);
+            openHelper = new DbOpenHelper(context, dbName, null);
         }
         return openHelper.getReadableDatabase();
     }
@@ -252,7 +252,7 @@ public class DBDao {
      */
     private SQLiteDatabase getWritableDatabase() {
         if (openHelper == null) {
-            openHelper = new DaoMaster.DevOpenHelper(context, dbName, null);
+            openHelper = new DbOpenHelper(context, dbName, null);
         }
         return openHelper.getWritableDatabase();
     }

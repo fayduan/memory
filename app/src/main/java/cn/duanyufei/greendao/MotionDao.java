@@ -28,6 +28,8 @@ public class MotionDao extends AbstractDao<Motion, Long> {
         public final static Property Text = new Property(1, String.class, "text", false, "TEXT");
         public final static Property Groups = new Property(2, int.class, "groups", false, "GROUPS");
         public final static Property Number = new Property(3, int.class, "number", false, "NUMBER");
+        public final static Property Pos = new Property(4, int.class, "pos", false, "POS");
+        public final static Property Part = new Property(5, String.class, "part", false, "PART");
     }
 
 
@@ -46,7 +48,9 @@ public class MotionDao extends AbstractDao<Motion, Long> {
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"TEXT\" TEXT," + // 1: text
                 "\"GROUPS\" INTEGER NOT NULL ," + // 2: groups
-                "\"NUMBER\" INTEGER NOT NULL );"); // 3: number
+                "\"NUMBER\" INTEGER NOT NULL ," + // 3: number
+                "\"POS\" INTEGER NOT NULL ," + // 4: pos
+                "\"PART\" TEXT);"); // 5: part
     }
 
     /** Drops the underlying database table. */
@@ -70,6 +74,12 @@ public class MotionDao extends AbstractDao<Motion, Long> {
         }
         stmt.bindLong(3, entity.getGroups());
         stmt.bindLong(4, entity.getNumber());
+        stmt.bindLong(5, entity.getPos());
+ 
+        String part = entity.getPart();
+        if (part != null) {
+            stmt.bindString(6, part);
+        }
     }
 
     @Override
@@ -87,6 +97,12 @@ public class MotionDao extends AbstractDao<Motion, Long> {
         }
         stmt.bindLong(3, entity.getGroups());
         stmt.bindLong(4, entity.getNumber());
+        stmt.bindLong(5, entity.getPos());
+ 
+        String part = entity.getPart();
+        if (part != null) {
+            stmt.bindString(6, part);
+        }
     }
 
     @Override
@@ -100,7 +116,9 @@ public class MotionDao extends AbstractDao<Motion, Long> {
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // text
             cursor.getInt(offset + 2), // groups
-            cursor.getInt(offset + 3) // number
+            cursor.getInt(offset + 3), // number
+            cursor.getInt(offset + 4), // pos
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // part
         );
         return entity;
     }
@@ -111,6 +129,8 @@ public class MotionDao extends AbstractDao<Motion, Long> {
         entity.setText(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setGroups(cursor.getInt(offset + 2));
         entity.setNumber(cursor.getInt(offset + 3));
+        entity.setPos(cursor.getInt(offset + 4));
+        entity.setPart(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
      }
     
     @Override

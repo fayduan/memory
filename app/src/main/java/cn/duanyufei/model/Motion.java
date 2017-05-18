@@ -19,6 +19,8 @@ public class Motion implements Serializable{
     int number;
     @Transient
     int curWeight;
+    int pos;
+    String part;
 
     public Motion(String text, int groups, int number) {
         this.text = text;
@@ -33,16 +35,28 @@ public class Motion implements Serializable{
         this.curWeight = curWeight;
     }
 
+    public Motion(String text, int groups, int number, int curWeight, int pos, String part) {
+        this.text = text;
+        this.groups = groups;
+        this.number = number;
+        this.curWeight = curWeight;
+        this.pos = pos;
+        this.part = part;
+    }
+
     @Generated(hash = 499522415)
     public Motion() {
     }
 
-    @Generated(hash = 1970223015)
-    public Motion(Long id, String text, int groups, int number) {
+    @Generated(hash = 579024221)
+    public Motion(Long id, String text, int groups, int number, int pos,
+            String part) {
         this.id = id;
         this.text = text;
         this.groups = groups;
         this.number = number;
+        this.pos = pos;
+        this.part = part;
     }
 
     public Long getId() {
@@ -94,5 +108,21 @@ public class Motion implements Serializable{
                 ", number=" + number +
                 ", curWeight=" + curWeight +
                 '}';
+    }
+
+    public int getPos() {
+        return this.pos;
+    }
+
+    public void setPos(int pos) {
+        this.pos = pos;
+    }
+
+    public String getPart() {
+        return this.part;
+    }
+
+    public void setPart(String part) {
+        this.part = part;
     }
 }
