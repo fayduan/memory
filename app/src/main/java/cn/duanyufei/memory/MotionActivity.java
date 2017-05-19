@@ -54,12 +54,11 @@ public class MotionActivity extends ViewPagerActivity {
 
     private void initViewPager() {
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
-
         mFragments = new ArrayList<>();
-        mFragments.add(new PartFragment());
-        mFragments.add(new PartFragment());
-        mFragments.add(new PartFragment());
 
+        mFragments.add(newPartFragment(0));
+        mFragments.add(newPartFragment(1));
+        mFragments.add(newPartFragment(2));
 
         mViewPager.setAdapter(new SectionsPagerAdapter(getSupportFragmentManager(), mFragments));
         mViewPager.addOnPageChangeListener(this);
@@ -80,5 +79,13 @@ public class MotionActivity extends ViewPagerActivity {
             MotionActivity.this.startActivity(new Intent(MotionActivity.this, AddMotionActivity.class));
         }
         return true;
+    }
+
+    private PartFragment newPartFragment(int pos) {
+        PartFragment fragment = new PartFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("pos", pos);
+        fragment.setArguments(bundle);
+        return fragment;
     }
 }

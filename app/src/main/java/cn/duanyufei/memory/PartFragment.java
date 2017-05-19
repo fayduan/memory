@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,8 @@ import cn.duanyufei.util.ToastUtil;
 
 public class PartFragment extends ViewPagerFragment {
 
+    final static String TAG = "PartFragment";
+
     private int pos;
 
     private static final int DEL_TAG = 0;
@@ -43,6 +46,8 @@ public class PartFragment extends ViewPagerFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_content, container, false);
         delid = 0;
+
+        pos = getArguments().getInt("pos", -1);
 
         lv = (ListView) view.findViewById(R.id.list);
         lv.setOnItemClickListener(itemListener);
@@ -181,6 +186,7 @@ public class PartFragment extends ViewPagerFragment {
             ToastUtil.show(R.string.msg_nolist);
         }
         adapter.notifyDataSetChanged();
+        Log.i(TAG, "onShow: " + pos);
     }
 
     @Override
