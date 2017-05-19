@@ -76,7 +76,9 @@ public class MotionActivity extends ViewPagerActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_add) {
-            MotionActivity.this.startActivity(new Intent(MotionActivity.this, AddMotionActivity.class));
+            Intent intent = new Intent(MotionActivity.this, AddMotionActivity.class);
+            intent.putExtra("pos", mSelectedIndex);
+            MotionActivity.this.startActivity(intent);
         }
         return true;
     }

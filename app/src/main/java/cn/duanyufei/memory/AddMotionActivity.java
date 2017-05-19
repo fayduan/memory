@@ -85,17 +85,20 @@ public class AddMotionActivity extends AppCompatActivity {
             txtGroup.setText(m.getGroups() + "");
             txtNumber.setText(m.getNumber() + "");
             txtCurWeight.setText(m.getCurWeight() + "");
-            switch (m.getPos()) {
-                case 0:
-                    rbChest.setChecked(true);
-                    break;
-                case 1:
-                    rbBack.setChecked(true);
-                    break;
-                case 2:
-                    rbLeg.setChecked(true);
-                    break;
-            }
+            pos = m.getPos();
+        } else {
+            pos = getIntent().getIntExtra("pos", 0);
+        }
+        switch (pos) {
+            case 0:
+                rbChest.setChecked(true);
+                break;
+            case 1:
+                rbBack.setChecked(true);
+                break;
+            case 2:
+                rbLeg.setChecked(true);
+                break;
         }
     }
 
