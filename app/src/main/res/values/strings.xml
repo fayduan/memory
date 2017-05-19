@@ -47,5 +47,6 @@
     <string name="chest">大胸</string>
     <string name="back">宽背</string>
     <string name="leg">肩腿</string>
+    <string name="part">部位</string>
 
 </resources>

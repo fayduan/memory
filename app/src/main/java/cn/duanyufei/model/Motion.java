@@ -35,6 +35,14 @@ public class Motion implements Serializable{
         this.curWeight = curWeight;
     }
 
+    public Motion(String text, int groups, int number, int curWeight, int pos) {
+        this.text = text;
+        this.groups = groups;
+        this.number = number;
+        this.curWeight = curWeight;
+        this.pos = pos;
+    }
+
     public Motion(String text, int groups, int number, int curWeight, int pos, String part) {
         this.text = text;
         this.groups = groups;

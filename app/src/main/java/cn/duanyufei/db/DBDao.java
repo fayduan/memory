@@ -124,6 +124,7 @@ public class DBDao {
         oldMotion.setGroups(motion.getGroups());
         oldMotion.setNumber(motion.getNumber());
         oldMotion.setText(motion.getText());
+        oldMotion.setPos(motion.getPos());
         if (oldMotion.getCurWeight() != motion.getCurWeight()) {
             addRecord(new Record(oldMotion.getId(), new Date(), motion.getCurWeight()));
         }
