@@ -159,6 +159,26 @@ public class DBDao {
         }
     }
 
+    public List<Motion> findMotionByPos(int pos) {
+        DaoMaster daoMaster = new DaoMaster(getReadableDatabase());
+        DaoSession daoSession = daoMaster.newSession();
+        MotionDao dao = daoSession.getMotionDao();
+        QueryBuilder<Motion> qb = dao.queryBuilder();
+        qb.where(MotionDao.Properties.Pos.eq(pos));
+        List<Motion> motions = qb.list();
+        RecordDao recordDao = daoSession.getRecordDao();
+        for (int i = 0; i < motions.size(); i++) {
+            QueryBuilder<Record> recordQueryBuilder = recordDao.queryBuilder();
+            recordQueryBuilder.where(RecordDao.Properties.MotionId.eq(motions.get(i).getId()));
+            recordQueryBuilder.orderDesc(RecordDao.Properties.Date);
+            List<Record> records = recordQueryBuilder.list();
+            if (records != null && records.size() != 0) {
+                motions.get(i).setCurWeight(records.get(0).getWeight());
+            }
+        }
+        return motions;
+    }
+
     public Record findNewestRecord(long id) {
         DaoMaster daoMaster = new DaoMaster(getReadableDatabase());
         DaoSession daoSession = daoMaster.newSession();

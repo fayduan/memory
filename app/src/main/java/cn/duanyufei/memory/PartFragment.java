@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -181,12 +180,11 @@ public class PartFragment extends ViewPagerFragment {
 
     @Override
     public void onShow() {
-        ml = dao.findAllMotion();
+        ml = dao.findMotionByPos(pos);
         if (ml.size() == 0) {
             ToastUtil.show(R.string.msg_nolist);
         }
         adapter.notifyDataSetChanged();
-        Log.i(TAG, "onShow: " + pos);
     }
 
     @Override
