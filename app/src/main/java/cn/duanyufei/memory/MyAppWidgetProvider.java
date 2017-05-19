@@ -50,7 +50,7 @@ public class MyAppWidgetProvider extends AppWidgetProvider {
         //Intent intent = getIntent();
         int n = appWidgetIds.length;
         for (int i = 0; i < n; i++) {
-            int mId = ConfigActivity.getID(context, appWidgetIds[i]);
+            int mId = (int) ConfigActivity.getID(context, appWidgetIds[i]);
 
 
             Message message = new Message();

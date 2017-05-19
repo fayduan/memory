@@ -123,9 +123,9 @@ public class ConfigActivity extends AppCompatActivity {
         editor1.commit();
     }
 
-    public static int getID(Context context, int appWidgetId) {
+    public static long getID(Context context, int appWidgetId) {
         SharedPreferences sp = context.getSharedPreferences("mid", Activity.MODE_PRIVATE);
-        return sp.getInt("awmid_" + appWidgetId, -1);
+        return sp.getLong("awmid_" + appWidgetId, -1);
     }
 
     public static int getAwID(Context context, long mId) {
