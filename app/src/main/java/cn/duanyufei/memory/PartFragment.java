@@ -53,7 +53,7 @@ public class PartFragment extends ViewPagerFragment {
         lv.setOnItemLongClickListener(itemLongListener);
 
         dao = DBDao.getInstance();
-        ml = dao.findAllMotion();
+        ml = dao.findMotionByPos(pos);
         adapter = new MyAdapter();
         lv.setAdapter(adapter);
 

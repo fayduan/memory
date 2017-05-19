@@ -160,6 +160,7 @@ public class DBDao {
     }
 
     public List<Motion> findMotionByPos(int pos) {
+        if (pos == -1) return null;
         DaoMaster daoMaster = new DaoMaster(getReadableDatabase());
         DaoSession daoSession = daoMaster.newSession();
         MotionDao dao = daoSession.getMotionDao();
