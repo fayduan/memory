@@ -12,3 +12,4 @@ app/Memory_*.apk
 projectFilesBackup/.idea/workspace.xml
 .idea/
 app/build/
+/app/release/

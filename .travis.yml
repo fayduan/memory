@@ -43,9 +43,9 @@ deploy:
   api_key:
     secure: ZP18LN+hC9SOegQQMDOp+JMNr0W60T3rf8HH6qjqS9hzkHut3XGVwj5xptc3awYMsFSnkiW5zqSICtSNWmRvab4JHrjy2XVWVcZA4dNdPsiwg1yx7ISrq0ASgGgx6km6yoPnmV4xfRmo/M8C1ZNcFyFXBvoS/8aPSWp09FOGr9rZwYpKNSRdUyFfx1/fN4JlAxmg3ZEcjjYFh/i4w3ITKQEZTakI9+aQvl9yeBIX8DFukiVKMp8uF2mnWJAuLqu2MSt13uYBLD2qTjEWGoxUH5VF/ewgu7L6BrnRLWt2oxxwAaQyTV6XC7EyufLME+TJd2C+SNPOlBj7YyRn7dcXwUko4NGiQq77KSMj4eCg6SmxCYh6JONaJUps2WF2jKbnV1LCBKHiDU8+qfWXz+x+VypwLF9zggK1ZipWk9WthBZxVQ9NfjIc+rJJdcu933V0gceMPnvRwsBjrW4lMOZhYTxI4aRa1Cqpvg73eyevfVsHfQxr3C5Lm4Uwmz49lA49JiDe15wgz6GOgk24lTRZYbU6EtkJFNS2h8GiiLOUvNVnvo+2ADLD6z86tOM5/SjFhyVdqTQE6YNq97yMK82HFrg/3TBH1OL1EYt0v2WK4KTLaw/lwcuv2aHo8PlA2M2w/IJrGFNEseC738QIV2v1MNGtAgU4H5xLIZG5ORyuzhM=
   file_glob: true
-  file: app/build/outputs/apk/Memory*.apk
+  file: app/build/outputs/apk/release/Memory*.apk
   on:
     tags: true
     repo: fayduan/memory
 after_deploy:
-  - fir p app/build/outputs/apk/Memory*.apk -T $FIR_TOKEN -c "`git cat-file tag $TRAVIS_TAG`"
+  - fir p app/build/outputs/apk/release/Memory*.apk -T $FIR_TOKEN -c "`git cat-file tag $TRAVIS_TAG`"
