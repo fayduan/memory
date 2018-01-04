@@ -23,7 +23,7 @@ public class DBDao {
 
     final static String TAG = "DBDao";
 
-    private final static String dbName = "memory.db";
+    public final static String dbName = "memory.db";
     private static DBDao mInstance;
     private DbOpenHelper openHelper;
     private Context context;

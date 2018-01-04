@@ -149,6 +149,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_motion:
                 startActivity(new Intent(this, MotionActivity.class));
                 break;
+            case R.id.menu_backup:
+                startActivity(new Intent(this, BackupActivity.class));
+                break;
         }
         return true;
     }
