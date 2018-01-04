@@ -15,7 +15,9 @@ android:
   - okio-1.11.0
   - gson-2.8.0
   licenses:
-  - android-sdk-license-.+
+  - 'android-sdk-preview-license-.+'
+  - 'android-sdk-license-.+'
+  - 'google-gdk-license-.+'
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
