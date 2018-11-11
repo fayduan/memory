@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
 import android.widget.DatePicker;
 import android.widget.DatePicker.OnDateChangedListener;
 import android.widget.EditText;
@@ -50,6 +51,7 @@ public class AddActivity extends AppCompatActivity {
         });
 
         mname = (EditText) findViewById(R.id.mname);
+        mname.setInputType(EditorInfo.TYPE_CLASS_TEXT);
         dp = (DatePicker) findViewById(R.id.add_dp);
         calendar = Calendar.getInstance();
         if (id != -1) {

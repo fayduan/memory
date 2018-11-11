@@ -7,7 +7,7 @@ import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.idescout.sql.SqlScoutServer;
+//import com.idescout.sql.SqlScoutServer;
 
 public class WelcomeActivity extends Activity {
 
@@ -29,7 +29,7 @@ public class WelcomeActivity extends Activity {
             }
         }, 700);
 
-        SqlScoutServer.create(this, getPackageName());
+//        SqlScoutServer.create(this, getPackageName());
     }
 
 }
