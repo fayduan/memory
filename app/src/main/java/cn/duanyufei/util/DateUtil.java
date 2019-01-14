@@ -19,7 +19,7 @@ public class DateUtil {
     public static String toDateTimeString(Date date) {
         if (date == null)
             return "";
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
         String temp = sdf.format(date);
         return temp;
     }
@@ -33,7 +33,7 @@ public class DateUtil {
     public static String toTimeString(Date date) {
         if (date == null)
             return "";
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss", Locale.CHINA);
         String temp = sdf.format(date);
         return temp;
     }
@@ -48,7 +48,7 @@ public class DateUtil {
     public static Date fromDateTimeString(String str) throws ParseException {
         if (str == null || str.length() == 0)
             return null;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
         return sdf.parse(str);
     }
 
@@ -65,6 +65,11 @@ public class DateUtil {
      */
     public static String toShortDateString(Date date) {
         if (date == null) return "";
-        return new SimpleDateFormat("yyyy/M/d").format(date);
+        return new SimpleDateFormat("yyyy/M/d", Locale.CHINA).format(date);
+    }
+
+    public static String toDateString(Date date) {
+        if (date == null) return "";
+        return new SimpleDateFormat("yyyy.MM.dd", Locale.CHINA).format(date);
     }
 }

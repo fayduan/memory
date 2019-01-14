@@ -58,7 +58,7 @@
         <activity android:name=".RecordActivity" />
         <activity android:name=".AddRecordActivity" />
         <activity android:name=".BackupActivity" />
-        <activity android:name=".MemoryActivity" />
+        <activity android:name="cn.duanyufei.epoch.MemoryActivity" />
     </application>
 
 </manifest>

@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.Window
 import android.view.WindowManager
+import cn.duanyufei.epoch.MemoryActivity
+import cn.duanyufei.util.UpdateTask
 
 //import com.idescout.sql.SqlScoutServer;
 
@@ -18,6 +20,11 @@ class WelcomeActivity : Activity() {
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN)
         setContentView(R.layout.activity_welcome)
+
+        UpdateTask(this).update()
+        val appWidgetIntent = Intent(this, AppWidgetService::class.java)
+        startService(appWidgetIntent)
+        SettingsActivity.updateWidget(this)
 
         Handler().postDelayed({
             val intent = Intent(this@WelcomeActivity, MemoryActivity::class.java)

@@ -1,24 +1,24 @@
-package cn.duanyufei.memory
+package cn.duanyufei.epoch
 
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import cn.duanyufei.memory.R
 
 /**
- * 纪念日fragment
+ * 计划fragment
  * Created by fayduan on 2019/1/14.
  */
-class SouvenirFragment : Fragment() {
+class PlanFragment : Fragment() {
 
     companion object {
-        fun newInstance() = SouvenirFragment()
+        fun newInstance() = PlanFragment()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_souvenir, container, false)
+        return inflater.inflate(R.layout.fragment_plan, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

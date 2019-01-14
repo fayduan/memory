@@ -53,12 +53,6 @@ public class MainActivity extends AppCompatActivity {
         delid = 0;
         setContentView(R.layout.activity_main);
 
-        new UpdateTask(this).update();
-
-        Intent intent = new Intent(this, AppWidgetService.class);
-        startService(intent);
-        SettingsActivity.updateWidget(this);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

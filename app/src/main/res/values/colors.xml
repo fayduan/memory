@@ -16,4 +16,12 @@
     <color name="black">#000000</color>
     <color name="blue_dark">#012A4C</color>
     <color name="blue_light">#33B6EA</color>
+
+    <color name="white_80">#CCFFFFFF</color>
+    <color name="white_60">#99FFFFFF</color>
+    <color name="white_40">#66FFFFFF</color>
+    <color name="primary_60">#992196F3</color>
+    <color name="primary_80">#CC2196F3</color>
+    <color name="red_80">#CCEF5350</color>
+
 </resources>
