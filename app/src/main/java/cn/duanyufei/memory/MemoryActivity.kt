@@ -11,6 +11,8 @@ class MemoryActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_motion)
+        setContentView(R.layout.activity_memory)
+
+        
     }
 }
