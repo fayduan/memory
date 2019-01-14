@@ -64,4 +64,7 @@
     <string name="no_data">没你的数据</string>
     <string name="recover_0">恢复成功</string>
 
+    <string name="exit">返回</string>
+    <string name="change">修改</string>
+
 </resources>
