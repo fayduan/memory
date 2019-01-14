@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Memory</string>
+    <string name="tab_plan">Plan</string>
     <string name="version">0.5</string>
     <string name="hello_world">Hello world!</string>
     <string name="msg_main_day">天</string>

@@ -46,6 +46,11 @@ class MemoryActivity : FragmentActivity(), View.OnClickListener {
     }
 
     private fun switchFragment(fragmentTag: String) {
+        tab_name.text = if (fragmentTag == TAG_SOUVENIR) {
+            getText(R.string.app_name)
+        } else {
+            getText(R.string.tab_plan)
+        }
         val fragment = buildFragment(fragmentTag)
         val transaction = supportFragmentManager.beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
         hideCurrentFragment(transaction)
