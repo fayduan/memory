@@ -36,6 +36,11 @@ class MemoryActivity : FragmentActivity(), View.OnClickListener {
         fab.setOnClickListener(this)
     }
 
+    override fun onResume() {
+        super.onResume()
+        switchFragment(curFragment)
+    }
+
     fun showSnackBar() {
         snackBar.show()
     }
