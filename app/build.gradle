@@ -3,6 +3,8 @@ import java.util.regex.Pattern
 
 apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 28
@@ -79,4 +81,5 @@ dependencies {
     implementation 'org.greenrobot:greendao:3.2.2'
 //    compile 'com.idescout.sql:sqlscout-server:2.0'
     implementation 'com.ashokvarma.android:bottom-navigation-bar:2.1.0'
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
