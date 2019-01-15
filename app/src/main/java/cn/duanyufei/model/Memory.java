@@ -53,8 +53,8 @@ public class Memory {
         this.position = 0;
     }
 
-    @Generated(hash = 2119351477)
-    public Memory(Long id, String text, Date date, int position) {
+    @Generated(hash = 64278047)
+    public Memory(Long id, String text, Date date, Integer position) {
         this.id = id;
         this.text = text;
         this.date = date;
@@ -129,6 +129,10 @@ public class Memory {
     }
 
     public void setPosition(int position) {
+        this.position = position;
+    }
+
+    public void setPosition(Integer position) {
         this.position = position;
     }
 }

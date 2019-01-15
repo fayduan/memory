@@ -27,7 +27,7 @@ public class MemoryDao extends AbstractDao<Memory, Long> {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Text = new Property(1, String.class, "text", false, "TEXT");
         public final static Property Date = new Property(2, java.util.Date.class, "date", false, "DATE");
-        public final static Property Position = new Property(3, int.class, "position", false, "POSITION");
+        public final static Property Position = new Property(3, Integer.class, "position", false, "POSITION");
     }
 
 
@@ -46,7 +46,7 @@ public class MemoryDao extends AbstractDao<Memory, Long> {
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"TEXT\" TEXT," + // 1: text
                 "\"DATE\" INTEGER," + // 2: date
-                "\"POSITION\" INTEGER NOT NULL );"); // 3: position
+                "\"POSITION\" INTEGER);"); // 3: position
     }
 
     /** Drops the underlying database table. */
@@ -73,7 +73,11 @@ public class MemoryDao extends AbstractDao<Memory, Long> {
         if (date != null) {
             stmt.bindLong(3, date.getTime());
         }
-        stmt.bindLong(4, entity.getPosition());
+ 
+        Integer position = entity.getPosition();
+        if (position != null) {
+            stmt.bindLong(4, position);
+        }
     }
 
     @Override
@@ -94,7 +98,11 @@ public class MemoryDao extends AbstractDao<Memory, Long> {
         if (date != null) {
             stmt.bindLong(3, date.getTime());
         }
-        stmt.bindLong(4, entity.getPosition());
+ 
+        Integer position = entity.getPosition();
+        if (position != null) {
+            stmt.bindLong(4, position);
+        }
     }
 
     @Override
@@ -108,7 +116,7 @@ public class MemoryDao extends AbstractDao<Memory, Long> {
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // text
             cursor.isNull(offset + 2) ? null : new java.util.Date(cursor.getLong(offset + 2)), // date
-            cursor.getInt(offset + 3) // position
+            cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3) // position
         );
         return entity;
     }
@@ -118,7 +126,7 @@ public class MemoryDao extends AbstractDao<Memory, Long> {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setText(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setDate(cursor.isNull(offset + 2) ? null : new java.util.Date(cursor.getLong(offset + 2)));
-        entity.setPosition(cursor.getInt(offset + 3));
+        entity.setPosition(cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3));
      }
     
     @Override
