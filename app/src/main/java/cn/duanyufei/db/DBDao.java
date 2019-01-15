@@ -79,7 +79,13 @@ public class DBDao {
     public void updateMemory(long id, String text, Date date) {
         DaoMaster daoMaster = new DaoMaster(getWritableDatabase());
         DaoSession daoSession = daoMaster.newSession();
-        Memory memory = new Memory(id, text, date);
+        Memory memory = findMemory(id);
+        if (memory != null) {
+            memory.setText(text);
+            memory.setDate(date);
+        } else {
+            memory = new Memory(id, text, date);
+        }
         MemoryDao dao = daoSession.getMemoryDao();
         dao.update(memory);
     }

@@ -5,8 +5,6 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Message
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -21,13 +19,14 @@ import cn.duanyufei.model.Memory
 import cn.duanyufei.util.DateUtil
 import kotlinx.android.synthetic.main.fragment_souvenir.*
 import kotlinx.android.synthetic.main.item_souvenir.view.*
+import java.util.*
 import kotlin.properties.Delegates
 
 /**
  * 纪念日fragment
  * Created by fayduan on 2019/1/14.
  */
-class SouvenirFragment : Fragment(), Handler.Callback {
+class SouvenirFragment : Fragment() {
 
     companion object {
         fun newInstance() = SouvenirFragment()
@@ -36,7 +35,6 @@ class SouvenirFragment : Fragment(), Handler.Callback {
 
     private var dao = DBDao.getInstance()
     private var adapter by Delegates.notNull<SouvenirAdapter>()
-    private val handler = Handler(this)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_souvenir, container, false)
@@ -46,8 +44,11 @@ class SouvenirFragment : Fragment(), Handler.Callback {
         super.onActivityCreated(savedInstanceState)
         recycler_view.layoutManager = LinearLayoutManager(activity)
         adapter = SouvenirAdapter(activity!!)
-        adapter.deleteListener = deleteListener
         recycler_view.adapter = adapter
+        val itemTouchHelper = DragItemTouchHelper(DragItemTouchHelpCallback(onItemTouchCallbackListener))
+        itemTouchHelper.attachToRecyclerView(recycler_view);
+        itemTouchHelper.setDragEnable(true);
+        itemTouchHelper.setSwipeEnable(true);
         loadData()
     }
 
@@ -56,47 +57,65 @@ class SouvenirFragment : Fragment(), Handler.Callback {
         if (list.isNullOrEmpty()) {
             (activity as MemoryActivity).showSnackBar()
         } else {
-            adapter.addData(list)
+            adapter.setData(list)
         }
     }
 
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
-        if(hidden){
+        if (hidden) {
             //pause
-        }else{
+        } else {
             //resume
             loadData()
         }
     }
 
-    override fun handleMessage(msg: Message?): Boolean {
-        when (msg?.what) {
-            MSG_DELETE -> {
-                Toast.makeText(context, "已删除~", Toast.LENGTH_SHORT).show()
-                loadData()
-                adapter.notifyDataSetChanged()
+    private val onItemTouchCallbackListener = object : DragItemTouchHelpCallback.OnItemTouchCallbackListener {
+        override fun onSwiped(adapterPosition: Int) {
+            if (!adapter.data.isNullOrEmpty()) {
+                AlertDialog.Builder(context)
+                        .setTitle("某人要弹出来的")
+                        .setMessage("是手抖不？")
+                        .setPositiveButton("嗯嗯是的", delCancel)
+                        .setNegativeButton("显然不是", delOk)
+                        .show()
+                delPos = adapterPosition
             }
         }
-        return true
-    }
 
-    private val deleteListener = object : SouvenirAdapter.OnDeleteListener {
-        override fun delete(delId: Long) {
-            dao.deleteMemory(delId)
-            handler.sendEmptyMessage(MSG_DELETE)
+        override fun onMove(srcPosition: Int, targetPosition: Int): Boolean {
+            if (!adapter.data.isNullOrEmpty()) {
+                // 更换数据源中的数据Item的位置
+                Collections.swap(adapter.data, srcPosition, targetPosition)
+                // 更新UI中的Item的位置，主要是给用户看到交互效果
+                adapter.notifyItemMoved(srcPosition, targetPosition)
+                return true
+            }
+            return false
         }
     }
 
-    class SouvenirAdapter(private var context: Activity) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener, View.OnLongClickListener {
+    var delPos: Int = 0
+
+    var delCancel: DialogInterface.OnClickListener = DialogInterface.OnClickListener { arg0, arg1 ->
+        Toast.makeText(context, "手残了吧...", Toast.LENGTH_SHORT).show()
+        adapter.notifyDataSetChanged()
+    }
+    var delOk: DialogInterface.OnClickListener = DialogInterface.OnClickListener { arg0, arg1 ->
+        val m = adapter.data.removeAt(delPos)
+        dao.deleteMemory(m.id)
+        Toast.makeText(context, "已删除~", Toast.LENGTH_SHORT).show()
+        adapter.notifyItemRemoved(delPos)
+    }
+
+    class SouvenirAdapter(private var context: Activity) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
 
         var data = ArrayList<Memory>()
-        var deleteListener: OnDeleteListener? = null
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             val rootView = LayoutInflater.from(context).inflate(R.layout.item_souvenir, parent, false)
             rootView.setOnClickListener(this)
-            rootView.setOnLongClickListener(this)
             return ViewHolder(rootView)
         }
 
@@ -111,7 +130,7 @@ class SouvenirFragment : Fragment(), Handler.Callback {
             }
         }
 
-        fun addData(data: List<Memory>) {
+        fun setData(data: List<Memory>) {
             this.data.clear()
             this.data.addAll(data)
         }
@@ -127,29 +146,6 @@ class SouvenirFragment : Fragment(), Handler.Callback {
             changeIntent.setClass(context, AddActivity::class.java)
             changeIntent.putExtra("id", data.id)
             context.startActivity(changeIntent)
-        }
-
-        override fun onLongClick(v: View?): Boolean {
-            val pos = v?.tag as Int
-            delId = data[pos].id
-            AlertDialog.Builder(context)
-                    .setTitle("某人要弹出来的")
-                    .setMessage("是手抖不？")
-                    .setPositiveButton("嗯嗯是的", del_cancel)
-                    .setNegativeButton("显然不是", del_ok)
-                    .show()
-            return true
-        }
-
-        var delId: Long = 0
-
-        var del_cancel: DialogInterface.OnClickListener = DialogInterface.OnClickListener { arg0, arg1 -> Toast.makeText(context, "手残了吧...", Toast.LENGTH_SHORT).show() }
-        var del_ok: DialogInterface.OnClickListener = DialogInterface.OnClickListener { arg0, arg1 ->
-            deleteListener?.delete(delId)
-        }
-
-        interface OnDeleteListener {
-            fun delete(delId: Long)
         }
     }
 

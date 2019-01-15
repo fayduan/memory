@@ -44,6 +44,7 @@ public class Memory {
             this.number = Math.abs(this.number);
             this.number++;
         }
+        this.position = 0;
     }
 
     public Memory(Long id, String text, Date date) {
