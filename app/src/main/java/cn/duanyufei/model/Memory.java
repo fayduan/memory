@@ -18,6 +18,7 @@ public class Memory {
     Date date;
     @Transient
     int type;
+    Integer position;
 
     public Memory(String text, Date date) {
         this.text = text;
@@ -45,11 +46,19 @@ public class Memory {
         }
     }
 
-    @Generated(hash = 1142428380)
     public Memory(Long id, String text, Date date) {
         this.id = id;
         this.text = text;
         this.date = date;
+        this.position = 0;
+    }
+
+    @Generated(hash = 2119351477)
+    public Memory(Long id, String text, Date date, int position) {
+        this.id = id;
+        this.text = text;
+        this.date = date;
+        this.position = position;
     }
 
     @Generated(hash = 884616065)
@@ -113,5 +122,13 @@ public class Memory {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public int getPosition() {
+        return this.position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 }
