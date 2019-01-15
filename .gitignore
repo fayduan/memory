@@ -13,4 +13,4 @@ projectFilesBackup/.idea/workspace.xml
 .idea/
 app/build/
 /app/release/
-app/src/main/java/cn/duanyufei/greendao
+#app/src/main/java/cn/duanyufei/greendao
