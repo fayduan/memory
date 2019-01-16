@@ -28,7 +28,7 @@ abstract class BaseFragment : Fragment(), View.OnClickListener {
 
     protected var dao = DBDao.getInstance()!!
 
-    protected var adapter by Delegates.notNull<RecyclerAdapter>()
+    protected var adapter: RecyclerAdapter? = null
 
     protected var delPos: Int = 0
 
@@ -53,7 +53,7 @@ abstract class BaseFragment : Fragment(), View.OnClickListener {
         super.onActivityCreated(savedInstanceState)
         recycler_view.layoutManager = LinearLayoutManager(activity)
         adapter = RecyclerAdapter(activity!!)
-        adapter.onAdapter = getAdapterMethod()
+        adapter?.onAdapter = getAdapterMethod()
         recycler_view.adapter = adapter
         val itemTouchHelper = DragItemTouchHelper(DragItemTouchHelpCallback(onItemTouchCallbackListener))
         itemTouchHelper.attachToRecyclerView(recycler_view)
@@ -64,17 +64,17 @@ abstract class BaseFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         val pos = v?.tag as Int
-        val data = adapter.data[pos]
+        val data = adapter!!.data[pos]
         var type = -1
         var id = -1L
         when (data) {
             is Memory -> {
                 id = data.id
-                type = 1
+                type = 0
             }
             is Plan -> {
                 id = data.id
-                type = 2
+                type = 1
             }
         }
         val changeIntent = Intent()
@@ -116,22 +116,22 @@ abstract class BaseFragment : Fragment(), View.OnClickListener {
 
     var delCancel: DialogInterface.OnClickListener = DialogInterface.OnClickListener { arg0, arg1 ->
         Toast.makeText(context, "手残了吧...", Toast.LENGTH_SHORT).show()
-        adapter.notifyDataSetChanged()
+        adapter!!.notifyDataSetChanged()
     }
     var delOk: DialogInterface.OnClickListener = DialogInterface.OnClickListener { arg0, arg1 ->
-        val data = adapter.data.removeAt(delPos)
+        val data = adapter!!.data.removeAt(delPos)
         when (data) {
             is Memory -> dao.deleteMemory(data.id)
             is Plan -> dao.deletePlan(data.id)
         }
         Toast.makeText(context, "已删除~", Toast.LENGTH_SHORT).show()
-        adapter.notifyItemRemoved(delPos)
+        adapter!!.notifyDataSetChanged()
 
     }
 
     private val onItemTouchCallbackListener = object : DragItemTouchHelpCallback.OnItemTouchCallbackListener {
         override fun onSwiped(adapterPosition: Int) {
-            if (!adapter.data.isNullOrEmpty()) {
+            if (!adapter!!.data.isNullOrEmpty()) {
                 AlertDialog.Builder(context)
                         .setTitle("某人要弹出来的")
                         .setMessage("是手抖不？")
@@ -143,19 +143,19 @@ abstract class BaseFragment : Fragment(), View.OnClickListener {
         }
 
         override fun onMove(srcPosition: Int, targetPosition: Int): Boolean {
-            if (!adapter.data.isNullOrEmpty()) {
+            if (!adapter!!.data.isNullOrEmpty()) {
                 // 更换数据源中的数据Item的位置
-                Collections.swap(adapter.data, srcPosition, targetPosition)
+                Collections.swap(adapter!!.data, srcPosition, targetPosition)
                 // 更新UI中的Item的位置，主要是给用户看到交互效果
-                adapter.notifyItemMoved(srcPosition, targetPosition)
-                when (adapter.data[srcPosition]) {
+                adapter!!.notifyItemMoved(srcPosition, targetPosition)
+                when (adapter!!.data[srcPosition]) {
                     is Memory -> {
-                        dao.updateMemory(adapter.data[srcPosition] as Memory, srcPosition)
-                        dao.updateMemory(adapter.data[targetPosition] as Memory, targetPosition)
+                        dao.updateMemory(adapter!!.data[srcPosition] as Memory, srcPosition)
+                        dao.updateMemory(adapter!!.data[targetPosition] as Memory, targetPosition)
                     }
                     is Plan -> {
-                        dao.updatePlan(adapter.data[srcPosition] as Plan, srcPosition)
-                        dao.updatePlan(adapter.data[targetPosition] as Plan, targetPosition)
+                        dao.updatePlan(adapter!!.data[srcPosition] as Plan, srcPosition)
+                        dao.updatePlan(adapter!!.data[targetPosition] as Plan, targetPosition)
                     }
                 }
                 return true

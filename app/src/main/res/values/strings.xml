@@ -65,6 +65,9 @@
     <string name="recover_0">恢复成功</string>
 
     <string name="exit">返回</string>
-    <string name="change">修改</string>
+    <string name="change_memory">修改Memory</string>
+    <string name="change_plan">修改Plan</string>
+    <string name="add_memory">添加Memory</string>
+    <string name="add_plan">添加Plan</string>
 
 </resources>

@@ -111,6 +111,12 @@ class MemoryActivity : FragmentActivity(), View.OnClickListener {
             R.id.fab -> {
                 val addIntent = Intent()
                 addIntent.setClass(this, AddActivity::class.java)
+                val type = if (curFragment == TAG_SOUVENIR) {
+                    0
+                } else {
+                    1
+                }
+                addIntent.putExtra("type", type)
                 this.startActivity(addIntent)
             }
         }

@@ -23,8 +23,8 @@ class SouvenirFragment : BaseFragment() {
         if (list.isNullOrEmpty()) {
             (activity as MemoryActivity).showSnackBar()
         } else {
-            adapter.setData(list)
-            adapter.notifyDataSetChanged()
+            adapter?.setData(list)
+            adapter?.notifyDataSetChanged()
         }
     }
 
@@ -47,6 +47,8 @@ class SouvenirFragment : BaseFragment() {
             holder.itemView.tag = position
             if (data.type == 0) {
                 holder.itemView.txt_number.setTextColor(context!!.resources.getColor(R.color.red_80, null))
+            } else {
+                holder.itemView.txt_number.setTextColor(context!!.resources.getColor(R.color.primary, null))
             }
         }
     }

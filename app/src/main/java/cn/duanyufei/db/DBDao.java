@@ -118,9 +118,40 @@ public class DBDao {
         dao.insert(plan);
     }
 
-    public void updatePlan(Plan plan, int pos) {
+    public void updatePlan(Plan plan) {
         PlanDao dao = daoSession.getPlanDao();
+        dao.update(plan);
+    }
+
+    public void updatePlan(Plan plan, int pos) {
         plan.setPosition(pos);
+        updatePlan(plan);
+    }
+
+    public Plan findPlan(long id) {
+        PlanDao dao = daoSession.getPlanDao();
+        QueryBuilder<Plan> qb = dao.queryBuilder();
+        qb.where(PlanDao.Properties.Id.eq(id));
+        List<Plan> plans = qb.list();
+        if (plans == null || plans.size() == 0) {
+            return null;
+        } else {
+            return plans.get(0);
+        }
+    }
+
+    public void updatePlan(long id, String text, Date date) {
+        Plan plan = findPlan(id);
+        if (plan != null) {
+            plan.setText(text);
+            plan.setDate(date);
+        } else {
+            plan = new Plan();
+            plan.setId(id);
+            plan.setText(text);
+            plan.setDate(date);
+        }
+        PlanDao dao = daoSession.getPlanDao();
         dao.update(plan);
     }
 
