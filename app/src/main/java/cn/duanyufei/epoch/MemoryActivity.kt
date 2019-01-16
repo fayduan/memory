@@ -25,7 +25,7 @@ class MemoryActivity : FragmentActivity(), View.OnClickListener {
     }
 
     private var curFragment = ""
-    private var snackBar by Delegates.notNull<Snackbar>()
+    private var snackBar: Snackbar? = null
     private var souvenirFragment: SouvenirFragment? = null
     private var planFragment: PlanFragment? = null
 
@@ -35,19 +35,19 @@ class MemoryActivity : FragmentActivity(), View.OnClickListener {
         header.setOnClickListener(this)
         curFragment = TAG_SOUVENIR
         switchFragment(TAG_SOUVENIR)
-        snackBar = Snackbar.make(fab, R.string.msg_nolist, Snackbar.LENGTH_INDEFINITE).setAction(R.string.button_ok, { snackBar.dismiss() })
+        snackBar = Snackbar.make(fab, R.string.msg_nolist, Snackbar.LENGTH_INDEFINITE).setAction(R.string.button_ok, { snackBar?.dismiss() })
         fab.setOnClickListener(this)
         UpdateTask(this).update()
     }
 
     override fun onResume() {
         super.onResume()
-        souvenirFragment?.doResume()
-        planFragment?.doResume()
+        souvenirFragment?.loadData()
+        planFragment?.loadData()
     }
 
     fun showSnackBar() {
-        snackBar.show()
+        snackBar?.show()
     }
 
     private fun switchFragment(fragmentTag: String) {
@@ -56,6 +56,7 @@ class MemoryActivity : FragmentActivity(), View.OnClickListener {
         } else {
             getText(R.string.tab_plan)
         }
+        snackBar?.dismiss()
         val fragment = buildFragment(fragmentTag)
         val transaction = supportFragmentManager.beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
         hideCurrentFragment(transaction)

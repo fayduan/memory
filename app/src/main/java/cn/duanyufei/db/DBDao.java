@@ -18,6 +18,7 @@ import cn.duanyufei.greendao.PlanDao;
 import cn.duanyufei.greendao.RecordDao;
 import cn.duanyufei.model.Memory;
 import cn.duanyufei.model.Motion;
+import cn.duanyufei.model.Plan;
 import cn.duanyufei.model.Record;
 
 public class DBDao {
@@ -105,6 +106,35 @@ public class DBDao {
             memories.get(i).update();
         }
         return memories;
+    }
+
+    public void addPlan(String text, Date date) {
+        PlanDao dao = daoSession.getPlanDao();
+        Plan plan = new Plan();
+        plan.setText(text);
+        plan.setDate(date);
+        plan.setIsDone(false);
+        plan.setPosition(-1);
+        dao.insert(plan);
+    }
+
+    public void updatePlan(Plan plan, int pos) {
+        PlanDao dao = daoSession.getPlanDao();
+        plan.setPosition(pos);
+        dao.update(plan);
+    }
+
+    public void deletePlan(long id) {
+        PlanDao dao = daoSession.getPlanDao();
+        dao.deleteByKey(id);
+    }
+
+    synchronized public List<Plan> findAllPlan() {
+        PlanDao dao = daoSession.getPlanDao();
+        QueryBuilder<Plan> qb = dao.queryBuilder();
+        qb.orderAsc(PlanDao.Properties.Position);
+        qb.orderDesc(PlanDao.Properties.Id);
+        return qb.list();
     }
 
     public long addMotion(Motion motion) {
