@@ -44,14 +44,14 @@ public class Memory {
             this.number = Math.abs(this.number);
             this.number++;
         }
-        this.position = 0;
+        this.position = -1;
     }
 
     public Memory(Long id, String text, Date date) {
         this.id = id;
         this.text = text;
         this.date = date;
-        this.position = 0;
+        this.position = -1;
     }
 
     @Generated(hash = 64278047)

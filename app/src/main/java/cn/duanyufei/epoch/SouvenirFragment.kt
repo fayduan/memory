@@ -45,9 +45,9 @@ class SouvenirFragment : BaseFragment() {
         adapter = SouvenirAdapter(activity!!)
         recycler_view.adapter = adapter
         val itemTouchHelper = DragItemTouchHelper(DragItemTouchHelpCallback(onItemTouchCallbackListener))
-        itemTouchHelper.attachToRecyclerView(recycler_view);
-        itemTouchHelper.setDragEnable(true);
-        itemTouchHelper.setSwipeEnable(true);
+        itemTouchHelper.attachToRecyclerView(recycler_view)
+        itemTouchHelper.setDragEnable(true)
+        itemTouchHelper.setSwipeEnable(true)
         loadData()
     }
 
@@ -57,6 +57,7 @@ class SouvenirFragment : BaseFragment() {
             (activity as MemoryActivity).showSnackBar()
         } else {
             adapter.setData(list)
+            adapter.notifyDataSetChanged()
         }
     }
 
@@ -87,6 +88,8 @@ class SouvenirFragment : BaseFragment() {
                 Collections.swap(adapter.data, srcPosition, targetPosition)
                 // 更新UI中的Item的位置，主要是给用户看到交互效果
                 adapter.notifyItemMoved(srcPosition, targetPosition)
+                dao.updateMemory(adapter.data[srcPosition], srcPosition)
+                dao.updateMemory(adapter.data[targetPosition], targetPosition)
                 return true
             }
             return false

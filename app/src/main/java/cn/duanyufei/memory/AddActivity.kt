@@ -20,7 +20,7 @@ class AddActivity : Activity(), View.OnClickListener {
 
     private var mname: EditText? = null
     private var dp: DatePicker? = null
-    private var dao: DBDao? = null
+    private var dao = DBDao.getInstance()
     private var calendar: Calendar? = null
     private var selId: Long = 0
     private var context: Context? = null
@@ -28,7 +28,6 @@ class AddActivity : Activity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         context = this
-        dao = DBDao.getInstance()
         selId = intent.getLongExtra("id", -1L)
 
         setContentView(R.layout.activity_add)
@@ -63,13 +62,18 @@ class AddActivity : Activity(), View.OnClickListener {
                 if (!text.isEmpty()) {
                     if (selId != -1L) {
                         //Toast.makeText(getApplicationContext(), selId+text+calendar.toString(), Toast.LENGTH_SHORT).show();
-                        dao!!.updateMemory(selId, text, calendar!!.time)
+                        dao.updateMemory(selId, text, calendar!!.time)
                         val appWidgetId = ConfigActivity.getAwID(context!!, selId)
                         val awm = AppWidgetManager.getInstance(context)
                         MyAppWidgetProvider.sendMsg(context, awm, appWidgetId, selId)
                         Log.i("minor", "1sendmsg,appWidgetID=$appWidgetId,MID=$selId")
                     } else {
-                        dao!!.addMemory(text, calendar!!.time)
+                        dao.addMemory(text, calendar!!.time)
+
+                        val datas = dao.findAllMemory()
+                        datas.forEachIndexed { index, memory ->
+                            dao.updateMemory(memory, index)
+                        }
                     }
                     this.finish()
                 } else {

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.Window
 import android.view.WindowManager
+import cn.duanyufei.db.DBDao
 import cn.duanyufei.epoch.MemoryActivity
 import cn.duanyufei.util.UpdateTask
 
@@ -25,6 +26,12 @@ class WelcomeActivity : Activity() {
         val appWidgetIntent = Intent(this, AppWidgetService::class.java)
         startService(appWidgetIntent)
         SettingsActivity.updateWidget(this)
+
+        val dao = DBDao.getInstance()
+        val datas = dao.findAllMemory()
+        datas.forEachIndexed { index, memory ->
+            dao.updateMemory(memory, index)
+        }
 
         Handler().postDelayed({
             val intent = Intent(this@WelcomeActivity, MemoryActivity::class.java)

@@ -14,6 +14,7 @@ import cn.duanyufei.greendao.DaoMaster;
 import cn.duanyufei.greendao.DaoSession;
 import cn.duanyufei.greendao.MemoryDao;
 import cn.duanyufei.greendao.MotionDao;
+import cn.duanyufei.greendao.PlanDao;
 import cn.duanyufei.greendao.RecordDao;
 import cn.duanyufei.model.Memory;
 import cn.duanyufei.model.Motion;
@@ -26,13 +27,12 @@ public class DBDao {
     public final static String dbName = "memory.db";
     private static DBDao mInstance;
     private DbOpenHelper openHelper;
-    private Context context;
-    private Calendar cal;
+    private DaoSession daoSession;
 
-    private DBDao(Context context) {
-        this.context = context;
-        openHelper = new DbOpenHelper(context, dbName, null);
-        cal = Calendar.getInstance();
+    private DBDao() {
+        openHelper = new DbOpenHelper(MApplication.getContext(), dbName, null);
+        DaoMaster daoMaster = new DaoMaster(getReadableDatabase());
+        daoSession = daoMaster.newSession();
     }
 
     /**
@@ -45,7 +45,7 @@ public class DBDao {
         if (mInstance == null) {
             synchronized (DBDao.class) {
                 if (mInstance == null) {
-                    mInstance = new DBDao(MApplication.getContext());
+                    mInstance = new DBDao();
                 }
             }
         }
@@ -53,16 +53,12 @@ public class DBDao {
     }
 
     public void addMemory(String text, Date date) {
-        DaoMaster daoMaster = new DaoMaster(getWritableDatabase());
-        DaoSession daoSession = daoMaster.newSession();
         MemoryDao dao = daoSession.getMemoryDao();
         Memory memory = new Memory(text, date);
         dao.insert(memory);
     }
 
     public Memory findMemory(long id) {
-        DaoMaster daoMaster = new DaoMaster(getReadableDatabase());
-        DaoSession daoSession = daoMaster.newSession();
         MemoryDao dao = daoSession.getMemoryDao();
         QueryBuilder<Memory> qb = dao.queryBuilder();
         qb.where(MemoryDao.Properties.Id.eq(id));
@@ -77,8 +73,6 @@ public class DBDao {
     }
 
     public void updateMemory(long id, String text, Date date) {
-        DaoMaster daoMaster = new DaoMaster(getWritableDatabase());
-        DaoSession daoSession = daoMaster.newSession();
         Memory memory = findMemory(id);
         if (memory != null) {
             memory.setText(text);
@@ -90,18 +84,22 @@ public class DBDao {
         dao.update(memory);
     }
 
+    public void updateMemory(Memory memory, int pos) {
+        MemoryDao dao = daoSession.getMemoryDao();
+        memory.setPosition(pos);
+        dao.update(memory);
+    }
+
     public void deleteMemory(long id) {
-        DaoMaster daoMaster = new DaoMaster(getWritableDatabase());
-        DaoSession daoSession = daoMaster.newSession();
         MemoryDao dao = daoSession.getMemoryDao();
         dao.deleteByKey(id);
     }
 
     synchronized public List<Memory> findAllMemory() {
-        DaoMaster daoMaster = new DaoMaster(getReadableDatabase());
-        DaoSession daoSession = daoMaster.newSession();
         MemoryDao dao = daoSession.getMemoryDao();
         QueryBuilder<Memory> qb = dao.queryBuilder();
+        qb.orderAsc(MemoryDao.Properties.Position);
+        qb.orderDesc(MemoryDao.Properties.Id);
         List<Memory> memories = qb.list();
         for (int i = 0; i < memories.size(); i++) {
             memories.get(i).update();
@@ -270,7 +268,7 @@ public class DBDao {
      */
     private SQLiteDatabase getReadableDatabase() {
         if (openHelper == null) {
-            openHelper = new DbOpenHelper(context, dbName, null);
+            openHelper = new DbOpenHelper(MApplication.getContext(), dbName, null);
         }
         return openHelper.getReadableDatabase();
     }
@@ -280,7 +278,7 @@ public class DBDao {
      */
     private SQLiteDatabase getWritableDatabase() {
         if (openHelper == null) {
-            openHelper = new DbOpenHelper(context, dbName, null);
+            openHelper = new DbOpenHelper(MApplication.getContext(), dbName, null);
         }
         return openHelper.getWritableDatabase();
     }
