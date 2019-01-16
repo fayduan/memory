@@ -11,6 +11,7 @@ import android.support.v4.content.ContextCompat;
 import android.widget.RemoteViews;
 
 import cn.duanyufei.db.DBDao;
+import cn.duanyufei.epoch.MemoryActivity;
 import cn.duanyufei.model.Memory;
 import cn.duanyufei.util.ColorUtil;
 
@@ -97,7 +98,7 @@ public class MyAppWidgetProvider extends AppWidgetProvider {
             Memory m = dao.findMemory(mID);
             views = new RemoteViews(context.getPackageName(),
                     R.layout.widget_view_light);
-            Intent launchIntent = new Intent(context, MainActivity.class);
+            Intent launchIntent = new Intent(context, MemoryActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, launchIntent, 0);
             views.setOnClickPendingIntent(R.id.ll_widget, pendingIntent);
             views.setTextViewText(R.id.widget_text, m.getText());
