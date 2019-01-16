@@ -8,7 +8,6 @@ import android.view.Window
 import android.view.WindowManager
 import cn.duanyufei.db.DBDao
 import cn.duanyufei.epoch.MemoryActivity
-import cn.duanyufei.util.UpdateTask
 
 //import com.idescout.sql.SqlScoutServer;
 
@@ -22,7 +21,6 @@ class WelcomeActivity : Activity() {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN)
         setContentView(R.layout.activity_welcome)
 
-        UpdateTask(this).update()
         val appWidgetIntent = Intent(this, AppWidgetService::class.java)
         startService(appWidgetIntent)
         SettingsActivity.updateWidget(this)
