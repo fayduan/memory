@@ -61,7 +61,7 @@ class AddActivity : Activity(), View.OnClickListener {
             } else {
                 title_name.text = getText(R.string.add_memory)
             }
-            rg_pos.visibility = View.GONE
+            plan_type.visibility = View.GONE
         } else {
             // plan
             txt_date_desc.text = "不知道咋的日期"

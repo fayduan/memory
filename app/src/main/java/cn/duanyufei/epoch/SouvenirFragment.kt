@@ -21,7 +21,9 @@ class SouvenirFragment : BaseFragment() {
     override fun loadData() {
         val list = dao.findAllMemory()
         if (list.isNullOrEmpty()) {
-            (activity as MemoryActivity).showSnackBar()
+            activity?.let {
+                (it as MemoryActivity).showSnackBar()
+            }
         } else {
             adapter?.setData(list)
             adapter?.notifyDataSetChanged()
