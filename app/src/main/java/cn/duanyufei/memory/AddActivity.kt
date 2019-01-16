@@ -4,11 +4,13 @@ import android.app.Activity
 import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.os.Bundle
+import android.support.annotation.IdRes
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.DatePicker
 import android.widget.EditText
+import android.widget.RadioGroup
 import android.widget.Toast
 
 import java.util.Calendar
@@ -25,6 +27,7 @@ class AddActivity : Activity(), View.OnClickListener {
     private var selId: Long = 0
     private var type: Int = 0
     private var context: Context? = null
+    private var planType: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +44,13 @@ class AddActivity : Activity(), View.OnClickListener {
         mname!!.inputType = EditorInfo.TYPE_CLASS_TEXT
         dp = findViewById<View>(R.id.add_dp) as DatePicker
         calendar = Calendar.getInstance()
+        rg_pos.setOnCheckedChangeListener{ _, checkedId ->
+            when (checkedId) {
+                R.id.rb_short -> planType = 0
+                R.id.rb_middle -> planType = 1
+                R.id.rb_far -> planType = 2
+            }
+        }
         if (type == 0) {
             // memory
             if (selId != -1L) {
@@ -51,17 +61,24 @@ class AddActivity : Activity(), View.OnClickListener {
             } else {
                 title_name.text = getText(R.string.add_memory)
             }
+            rg_pos.visibility = View.GONE
         } else {
             // plan
-            mname!!.hint = "想要"
-            txt_date_desc.text = "哪天实现"
+            txt_date_desc.text = "不知道咋的日期"
             if (selId != -1L) {
                 val p = dao!!.findPlan(selId)
                 calendar!!.time = p.date
                 mname!!.setText(p.text)
+                planType = p.type
+                when (planType) {
+                    0 -> rg_pos.check(R.id.rb_short)
+                    1 -> rg_pos.check(R.id.rb_middle)
+                    2 -> rg_pos.check(R.id.rb_far)
+                }
                 title_name.text = getText(R.string.change_plan)
             } else {
                 title_name.text = getText(R.string.add_plan)
+                rg_pos.check(R.id.rb_short)
             }
         }
         val year = calendar!!.get(Calendar.YEAR)
@@ -97,10 +114,10 @@ class AddActivity : Activity(), View.OnClickListener {
                         }
                     } else {
                         if (selId != -1L) {
-                            dao.updatePlan(selId, text, calendar!!.time)
+                            dao.updatePlan(selId, text, calendar!!.time, planType)
                         } else {
-                            dao.addPlan(text, calendar!!.time)
-                            val datas = dao.findAllPlan()
+                            dao.addPlan(text, calendar!!.time, planType)
+                            val datas = dao.findAllPlanByType(planType)
                             datas.forEachIndexed { index, plan ->
                                 dao.updatePlan(plan, index)
                             }

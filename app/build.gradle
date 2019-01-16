@@ -57,7 +57,7 @@ android {
         it.buildConfigField 'String', 'FIR_TOKEN', project.hasProperty("FIR_TOKEN_STR") ? FIR_TOKEN_STR : System.getenv("FIR_TOKEN_STR")
     }
     greendao {
-        schemaVersion 4
+        schemaVersion 5
         targetGenDir 'src/main/java'
         daoPackage 'cn.duanyufei.greendao'
     }

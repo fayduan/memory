@@ -21,17 +21,19 @@ import android.widget.ImageView
 class PlanFragment : BaseFragment() {
 
     companion object {
-        fun newInstance() = PlanFragment()
+        fun newInstance(type: Int): PlanFragment {
+            val pf = PlanFragment()
+            pf.type = type
+            return pf
+        }
     }
 
+    private var type = 0
+
     override fun loadData() {
-        val list = dao.findAllPlan()
-        if (list.isNullOrEmpty()) {
-            (activity as MemoryActivity).showSnackBar()
-        } else {
-            adapter?.setData(list)
-            adapter?.notifyDataSetChanged()
-        }
+        val list = dao.findAllPlanByType(type)
+        adapter?.setData(list)
+        adapter?.notifyDataSetChanged()
     }
 
     override fun getAdapterMethod(): OnAdapter {

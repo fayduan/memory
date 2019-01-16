@@ -1,84 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:orientation="vertical">
+    android:fitsSystemWindows="true">
 
-    <RelativeLayout
-        android:id="@+id/header"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@mipmap/memory_bg"
-        android:gravity="center_vertical"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/btn_back"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/exit"
-            android:src="@mipmap/ic_arrow_back_white_36dp" />
+        <RelativeLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@mipmap/memory_bg"
+            android:gravity="center_vertical"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp">
 
-        <TextView
-            android:id="@+id/title_name"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:text="@string/add"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            <ImageView
+                android:id="@+id/btn_back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/exit"
+                android:src="@mipmap/ic_arrow_back_white_36dp" />
 
-        <ImageView
-            android:id="@+id/btn_add"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:src="@mipmap/ic_done_white_36dp" />
+            <TextView
+                android:id="@+id/title_name"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="@string/add"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/btn_add"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:src="@mipmap/ic_done_white_36dp" />
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="15dp">
+        </RelativeLayout>
 
-        <AutoCompleteTextView
-            android:id="@+id/mname"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/msg_name"
-            android:inputType="textEmailAddress"
-            android:maxLines="1"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp">
+
+            <AutoCompleteTextView
+                android:id="@+id/mname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/msg_name"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:textSize="16sp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <LinearLayout
+            android:id="@+id/plan_type"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="10dp"
+                android:text="@string/which_plan"
+                android:textColor="@color/accent"
+                android:textSize="18sp" />
+
+            <RadioGroup
+                android:id="@+id/rg_pos"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:checkedButton="@id/rb_short"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_short"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/short_plan"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/rb_middle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/middle_plan"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/rb_far"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/far_plan"
+                    android:textSize="18sp" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txt_date_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/msg_date"
+            android:textColor="@color/accent"
             android:textSize="16sp" />
 
-    </android.support.design.widget.TextInputLayout>
+        <DatePicker
+            android:id="@+id/add_dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:calendarViewShown="false" />
 
-    <TextView
-        android:id="@+id/txt_date_desc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/msg_date"
-        android:textColor="@color/accent"
-        android:textSize="16sp" />
+    </LinearLayout>
 
-    <DatePicker
-        android:id="@+id/add_dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="15dp"
-        android:calendarViewShown="false" />
-
-</LinearLayout>
-	
+</ScrollView>

@@ -18,13 +18,16 @@ public class Plan {
     Date date;
     boolean isDone;
     int position;
-    @Generated(hash = 231979778)
-    public Plan(Long id, String text, Date date, boolean isDone, int position) {
+    Integer type;
+    @Generated(hash = 1308002330)
+    public Plan(Long id, String text, Date date, boolean isDone, int position,
+            Integer type) {
         this.id = id;
         this.text = text;
         this.date = date;
         this.isDone = isDone;
         this.position = position;
+        this.type = type;
     }
     @Generated(hash = 592612124)
     public Plan() {
@@ -58,5 +61,11 @@ public class Plan {
     }
     public void setPosition(int position) {
         this.position = position;
+    }
+    public Integer getType() {
+        return this.type;
+    }
+    public void setType(Integer type) {
+        this.type = type;
     }
 }

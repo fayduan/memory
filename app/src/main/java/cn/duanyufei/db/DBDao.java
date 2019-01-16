@@ -108,11 +108,12 @@ public class DBDao {
         return memories;
     }
 
-    public void addPlan(String text, Date date) {
+    public void addPlan(String text, Date date, int type) {
         PlanDao dao = daoSession.getPlanDao();
         Plan plan = new Plan();
         plan.setText(text);
         plan.setDate(date);
+        plan.setType(type);
         plan.setIsDone(false);
         plan.setPosition(-1);
         dao.insert(plan);
@@ -140,16 +141,21 @@ public class DBDao {
         }
     }
 
-    public void updatePlan(long id, String text, Date date) {
+    public void updatePlan(long id, String text, Date date, int type) {
         Plan plan = findPlan(id);
         if (plan != null) {
             plan.setText(text);
             plan.setDate(date);
+            plan.setType(type);
         } else {
             plan = new Plan();
             plan.setId(id);
             plan.setText(text);
             plan.setDate(date);
+            if (plan.getType() != type) {
+                plan.setType(type);
+                plan.setPosition(-1);
+            }
         }
         PlanDao dao = daoSession.getPlanDao();
         dao.update(plan);
@@ -160,9 +166,10 @@ public class DBDao {
         dao.deleteByKey(id);
     }
 
-    synchronized public List<Plan> findAllPlan() {
+    synchronized public List<Plan> findAllPlanByType(int type) {
         PlanDao dao = daoSession.getPlanDao();
         QueryBuilder<Plan> qb = dao.queryBuilder();
+        qb.where(PlanDao.Properties.Type.eq(type));
         qb.orderAsc(PlanDao.Properties.Position);
         qb.orderDesc(PlanDao.Properties.Id);
         return qb.list();

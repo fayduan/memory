@@ -33,7 +33,7 @@ abstract class BaseFragment : Fragment(), View.OnClickListener {
     protected var delPos: Int = 0
 
     abstract fun loadData()
-    abstract fun getAdapterMethod(): OnAdapter
+    abstract fun getAdapterMethod(): OnAdapter?
 
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
@@ -53,7 +53,9 @@ abstract class BaseFragment : Fragment(), View.OnClickListener {
         super.onActivityCreated(savedInstanceState)
         recycler_view.layoutManager = LinearLayoutManager(activity)
         adapter = RecyclerAdapter(activity!!)
-        adapter?.onAdapter = getAdapterMethod()
+        getAdapterMethod()?.let {
+            adapter?.onAdapter = it
+        }
         recycler_view.adapter = adapter
         val itemTouchHelper = DragItemTouchHelper(DragItemTouchHelpCallback(onItemTouchCallbackListener))
         itemTouchHelper.attachToRecyclerView(recycler_view)

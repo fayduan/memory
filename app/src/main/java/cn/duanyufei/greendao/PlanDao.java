@@ -29,6 +29,7 @@ public class PlanDao extends AbstractDao<Plan, Long> {
         public final static Property Date = new Property(2, java.util.Date.class, "date", false, "DATE");
         public final static Property IsDone = new Property(3, boolean.class, "isDone", false, "IS_DONE");
         public final static Property Position = new Property(4, int.class, "position", false, "POSITION");
+        public final static Property Type = new Property(5, Integer.class, "type", false, "TYPE");
     }
 
 
@@ -48,7 +49,8 @@ public class PlanDao extends AbstractDao<Plan, Long> {
                 "\"TEXT\" TEXT," + // 1: text
                 "\"DATE\" INTEGER," + // 2: date
                 "\"IS_DONE\" INTEGER NOT NULL ," + // 3: isDone
-                "\"POSITION\" INTEGER NOT NULL );"); // 4: position
+                "\"POSITION\" INTEGER NOT NULL ," + // 4: position
+                "\"TYPE\" INTEGER);"); // 5: type
     }
 
     /** Drops the underlying database table. */
@@ -77,6 +79,11 @@ public class PlanDao extends AbstractDao<Plan, Long> {
         }
         stmt.bindLong(4, entity.getIsDone() ? 1L: 0L);
         stmt.bindLong(5, entity.getPosition());
+ 
+        Integer type = entity.getType();
+        if (type != null) {
+            stmt.bindLong(6, type);
+        }
     }
 
     @Override
@@ -99,6 +106,11 @@ public class PlanDao extends AbstractDao<Plan, Long> {
         }
         stmt.bindLong(4, entity.getIsDone() ? 1L: 0L);
         stmt.bindLong(5, entity.getPosition());
+ 
+        Integer type = entity.getType();
+        if (type != null) {
+            stmt.bindLong(6, type);
+        }
     }
 
     @Override
@@ -113,7 +125,8 @@ public class PlanDao extends AbstractDao<Plan, Long> {
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // text
             cursor.isNull(offset + 2) ? null : new java.util.Date(cursor.getLong(offset + 2)), // date
             cursor.getShort(offset + 3) != 0, // isDone
-            cursor.getInt(offset + 4) // position
+            cursor.getInt(offset + 4), // position
+            cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5) // type
         );
         return entity;
     }
@@ -125,6 +138,7 @@ public class PlanDao extends AbstractDao<Plan, Long> {
         entity.setDate(cursor.isNull(offset + 2) ? null : new java.util.Date(cursor.getLong(offset + 2)));
         entity.setIsDone(cursor.getShort(offset + 3) != 0);
         entity.setPosition(cursor.getInt(offset + 4));
+        entity.setType(cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5));
      }
     
     @Override
