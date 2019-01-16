@@ -11,7 +11,7 @@ import cn.duanyufei.memory.R
  * 计划fragment
  * Created by fayduan on 2019/1/14.
  */
-class PlanFragment : Fragment() {
+class PlanFragment : BaseFragment() {
 
     companion object {
         fun newInstance() = PlanFragment()
@@ -23,5 +23,13 @@ class PlanFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+    }
+
+    override fun doResume() {
+
+    }
+
+    override fun doPause() {
+
     }
 }

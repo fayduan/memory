@@ -25,6 +25,8 @@ class MemoryActivity : FragmentActivity(), View.OnClickListener {
 
     private var curFragment = ""
     private var snackBar by Delegates.notNull<Snackbar>()
+    private var souvenirFragment: SouvenirFragment? = null
+    private var planFragment: PlanFragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +40,8 @@ class MemoryActivity : FragmentActivity(), View.OnClickListener {
 
     override fun onResume() {
         super.onResume()
-        switchFragment(curFragment)
+        souvenirFragment?.doResume()
+        planFragment?.doResume()
     }
 
     fun showSnackBar() {
@@ -78,14 +81,18 @@ class MemoryActivity : FragmentActivity(), View.OnClickListener {
     }
 
     private fun buildFragment(fragmentTag: String): Fragment {
-        var fragment = supportFragmentManager.findFragmentByTag(fragmentTag)
+        val fragment = supportFragmentManager.findFragmentByTag(fragmentTag)
         if (fragment == null) {
-            fragment = SouvenirFragment.newInstance()
+            souvenirFragment = SouvenirFragment.newInstance()
             if (TAG_PLAN == fragmentTag) {
-                fragment = PlanFragment.newInstance()
+                planFragment = PlanFragment.newInstance()
             }
         }
-        return fragment
+        return if (fragmentTag == TAG_PLAN) {
+            planFragment!!
+        } else {
+            souvenirFragment!!
+        }
     }
 
     override fun onClick(v: View?) {

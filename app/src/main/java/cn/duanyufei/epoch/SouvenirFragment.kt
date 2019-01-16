@@ -26,11 +26,10 @@ import kotlin.properties.Delegates
  * 纪念日fragment
  * Created by fayduan on 2019/1/14.
  */
-class SouvenirFragment : Fragment() {
+class SouvenirFragment : BaseFragment() {
 
     companion object {
         fun newInstance() = SouvenirFragment()
-        private const val MSG_DELETE = 1
     }
 
     private var dao = DBDao.getInstance()
@@ -61,14 +60,12 @@ class SouvenirFragment : Fragment() {
         }
     }
 
-    override fun onHiddenChanged(hidden: Boolean) {
-        super.onHiddenChanged(hidden)
-        if (hidden) {
-            //pause
-        } else {
-            //resume
-            loadData()
-        }
+    override fun doResume() {
+        loadData()
+    }
+
+    override fun doPause() {
+
     }
 
     private val onItemTouchCallbackListener = object : DragItemTouchHelpCallback.OnItemTouchCallbackListener {
