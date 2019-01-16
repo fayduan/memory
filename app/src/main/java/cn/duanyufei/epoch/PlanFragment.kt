@@ -41,9 +41,9 @@ class PlanFragment : BaseFragment() {
     private val onAdapter = object : OnAdapter {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             val rootView = LayoutInflater.from(context).inflate(R.layout.item_plan, parent, false)
-            rootView.setOnClickListener(this@PlanFragment)
             rootView.checkbox.setOnClickListener(this@PlanFragment)
             expandViewTouchDelegate(rootView.checkbox, 30, 30, 30, 30)
+            rootView.setOnClickListener(this@PlanFragment)
             return ViewHolder(rootView)
         }
 
