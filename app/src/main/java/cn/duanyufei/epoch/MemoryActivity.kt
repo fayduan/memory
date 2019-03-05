@@ -8,7 +8,9 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.view.View
 import cn.duanyufei.memory.AddActivity
+import cn.duanyufei.memory.AppWidgetService
 import cn.duanyufei.memory.R
+import cn.duanyufei.memory.SettingsActivity
 import cn.duanyufei.util.UpdateTask
 import kotlinx.android.synthetic.main.activity_memory.*
 import kotlin.properties.Delegates
@@ -38,6 +40,9 @@ class MemoryActivity : FragmentActivity(), View.OnClickListener {
         snackBar = Snackbar.make(fab, R.string.msg_nolist, Snackbar.LENGTH_INDEFINITE).setAction(R.string.button_ok, { snackBar?.dismiss() })
         fab.setOnClickListener(this)
         UpdateTask(this).update()
+        val appWidgetIntent = Intent(this, AppWidgetService::class.java)
+        startService(appWidgetIntent)
+        SettingsActivity.updateWidget(this)
     }
 
     override fun onResume() {

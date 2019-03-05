@@ -21,10 +21,6 @@ class WelcomeActivity : Activity() {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN)
         setContentView(R.layout.activity_welcome)
 
-        val appWidgetIntent = Intent(this, AppWidgetService::class.java)
-        startService(appWidgetIntent)
-        SettingsActivity.updateWidget(this)
-
         val dao = DBDao.getInstance()
         val datas = dao.findAllMemory()
         datas.forEachIndexed { index, memory ->
