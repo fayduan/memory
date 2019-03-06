@@ -45,7 +45,7 @@ class MultiPlanFragment : Fragment(), BottomNavigationBar.OnTabSelectedListener,
         fragments.add(PlanFragment.newInstance(1))
         fragments.add(PlanFragment.newInstance(2))
 
-        view_pager.adapter = SectionsPagerAdapter(activity!!.supportFragmentManager, fragments)
+        view_pager.adapter = SectionsPagerAdapter(childFragmentManager, fragments)
         view_pager.addOnPageChangeListener(this)
         view_pager.currentItem = 0
     }

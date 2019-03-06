@@ -26,7 +26,6 @@ class SouvenirFragment : BaseFragment() {
             }
         } else {
             adapter?.setData(list)
-            adapter?.notifyDataSetChanged()
         }
     }
 

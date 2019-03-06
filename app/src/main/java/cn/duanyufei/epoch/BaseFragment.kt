@@ -107,6 +107,7 @@ abstract class BaseFragment : Fragment(), View.OnClickListener {
         fun setData(data: List<Any>) {
             this.data.clear()
             this.data.addAll(data)
+            notifyDataSetChanged()
         }
 
         override fun getItemCount(): Int {

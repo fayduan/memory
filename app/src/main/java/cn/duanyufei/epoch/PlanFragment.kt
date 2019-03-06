@@ -33,7 +33,6 @@ class PlanFragment : BaseFragment() {
     override fun loadData() {
         val list = dao.findAllPlanByType(type)
         adapter?.setData(list)
-        adapter?.notifyDataSetChanged()
     }
 
     override fun getAdapterMethod(): OnAdapter {

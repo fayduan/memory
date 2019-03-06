@@ -13,7 +13,6 @@ import cn.duanyufei.memory.R
 import cn.duanyufei.memory.SettingsActivity
 import cn.duanyufei.util.UpdateTask
 import kotlinx.android.synthetic.main.activity_memory.*
-import kotlin.properties.Delegates
 
 /**
  *
